@@ -1,0 +1,5 @@
+INDEX VERSION 1.134+F:\03.DAM\curso 2023-2024\01.AD\proyectos\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+1378544771.index
+3080990181.index
+3939960182.index
