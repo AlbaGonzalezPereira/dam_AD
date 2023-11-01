@@ -94,3 +94,57 @@ Una vez iniciemos sesión, pasaremos a la ventana del menú de usuario. En caso 
     * Si se pulsa en ``Cancelar``, se cerrará la ventana y se volverá al menú del usuario.
 
     <div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga8.png" alt="borrar usuario?" style = "width: 30%"></div>
+
+
+## **Modelo de la aplicación**
+El formato del fichero JSON donde se almacena la información debería tener el siguiente formato:
+```json
+[
+    {
+        "nombre": "fernando",
+        "contraseña": "password",
+        "edad": "19",
+        "correo": "fernando@correo.com"
+    },
+    {
+        "nombre": "ana",
+        "contraseña": "12345",
+        "edad": "30",
+        "correo": "ana@correo.com"
+    }
+]
+```
+
+Dentro de la carpeta del proyecto, en el paquete **``model``** se encontrarán las clases que gestionan la lógica de la aplicación.
+
+La clase **``AplicacionUsuarios``** tendrá como atributos la ruta del fichero JSON y las diferentes ventanas de la aplicación. Además, deberá tener los siguientes métodos:
+
+* ``private void crearFicheroJson()``: crea el fichero JSON si todavía no existe.
+
+* ``private JSONArray obtenerUsuariosJson()``: devuelve un JSONArray que contiene a todos los usuarios registrados en la aplicación.
+
+* ``private int obtenerPosicionUsuario(String nombreUsuario, JSONArray usuarios)``: devuelve la posición de un usuario dentro del array de usuarios. Si el usuario no está en el array, devuelve -1.
+
+* ``private JSONObject obtenerUsuarioJson(String nombreUsuario)``: devuelve todos los datos de un usuario, en formato JSONObject. Si el usuario no existe, devuelve null.
+
+* ``public void ejecutar()``: ejecuta la ventana de inicio de sesión.
+
+* ``public void iniciarSesion(String nombreUsuario, String contraseñaUsuario)``: inicia sesión en base al usuario y contraseña introducidos.
+
+* ``public void cerrarSesion()``: cierra la sesión y vuelve a la ventana de inicio.
+
+* ``public void crearUsuario(String nombre, String contraseña, String edad, String correo)``: registra un usuario en el fichero JSON en función de los datos pasados por parámetro.
+
+* ``public void cambiarContraseña(String nombre usuario, String nuevaContraseña)``: cambia la contraseña del usuario en el fichero JSON.
+
+* ``public void borrarUsuario(String nombreUsuario)``: borrar el usuario del fichero JSON y cierra sesión.
+
+* ``public void mostrarVentanaCrearUsuario()``: abre la ventana para crear un nuevo usuario.
+
+* ``public void mostrarVentanaVerUsuario(String nombreUsuario)``: abre la ventana en la que se muestran los datos del usuario.
+
+* ``public void mostrarVentanaCambiarContraseña(String nombreUsuario)``: abre la ventana que permite introducir una nueva contraseña.
+
+* ``public void mostrarVentanaBorrarUsuario(String nombreUsuario)``: abre la ventana para confirmar el borrado del usuario.
+
+La clase **``Principal``** tendrá un método main en el que simplemente se creará un objeto de la clase **``AplicaciónUsuarios``** y se llamará al método ``ejecutar()``.
