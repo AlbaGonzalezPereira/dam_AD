@@ -48,11 +48,11 @@ Las interfaces son las siguientes:
 
 Una vez iniciemos sesión, pasaremos a la ventana del menú de usuario. En caso de no estar registrados, podremos crear un usuario en el botón ``Crear nuevo usuario``, que nos llevará a la ventana correspondiente.
 
-<div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga1.png" alt="Palíndromo" style = "width: 60%"></div>
+<div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga1.png" alt="Inicio de sesión" style = "width: 30%"></div>
 
-<div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga2.png" alt="Palíndromo" style = "width: 60%"></div>
+<div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga2.png" alt="usuario no existe" style = "width: 30%"></div>
 
-<div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga3.png" alt="Palíndromo" style = "width: 60%"></div>
+<div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga3.png" alt="contraseña incorrecta" style = "width: 30%"></div>
 
 
 * **``VentanaCrearUsuario.java``**:
@@ -61,7 +61,7 @@ Una vez iniciemos sesión, pasaremos a la ventana del menú de usuario. En caso 
     * Si pulsamos en ``Cancelar``, volveremos a la ventana de inicio de sesión.
     * Si pulsamos en ``Crear``, se almacenarán los datos en el archivo JSON y se volverá a la ventana de inicio de sesión.
 
-    <div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga4.png" alt="Palíndromo" style = "width: 60%"></div>
+    <div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga4.png" alt="crear usuario" style = "width: 30%"></div>
 
 * **``VentanaMenuUsuario.java``**:
 
@@ -73,24 +73,24 @@ Una vez iniciemos sesión, pasaremos a la ventana del menú de usuario. En caso 
     * Si pulsamos en ``Cerrar sesión`` se volverá a la ventana de inicio.
 
 
-    <div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga5.png" alt="Palíndromo" style = "width: 60%"></div>
+    <div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga5.png" alt="menú usuario" style = "width: 30%"></div>
 
 * **``VentanaVerUsuario.java``**:
     * Se mostrarán en los diferentes campos el nombre, edad y correo electrónico del usuario.
     * Al pulsar en ``Volver`` se cerrará la ventana y se volverá al menú del usuario.
 
-    <div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga6.png" alt="Palíndromo" style = "width: 60%"></div>
+    <div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga6.png" alt="datos usuario" style = "width: 30%"></div>
 
 * **``VentanaCambiarContraseña.java``**:
     * En esta ventana se puede introducir la nueva contraseña del usuario.
     * Si pulsamos en ``Cambiar`` se realizará el cambio y se cerrará la sesión, volviendo a la ventana de inicio.
     * Si pulsamos en ``Cancelar`` se cerrará la ventana, volviendo al menú del usuario sin realizar el cambio.
 
-    <div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga7.png" alt="Palíndromo" style = "width: 60%"></div>
+    <div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga7.png" alt="cambiar contraseña" style = "width: 30%"></div>
 
 * **``VentanaBorrarUsuario.java``**:
     * En esta ventana podremos confirmar el borrado del usuario.
     * Si se pulsa en ``Borrar``, se borrará el usuario y se cerrará la sesión, volviendo a la ventana de inicio.
     * Si se pulsa en ``Cancelar``, se cerrará la ventana y se volverá al menú del usuario.
 
-    <div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga8.png" alt="Palíndromo" style = "width: 60%"></div>
+    <div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga8.png" alt="borrar usuario?" style = "width: 30%"></div>
