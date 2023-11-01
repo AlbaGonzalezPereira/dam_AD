@@ -50,9 +50,9 @@ Una vez iniciemos sesión, pasaremos a la ventana del menú de usuario. En caso 
 
 <div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga1.png" alt="Inicio de sesión" style = "width: 40%"></div>
 
-<div align = left><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga2.png" alt="usuario no existe" style = "width: 30%">
+<div align = left><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga2.png" alt="usuario no existe" style = "width: 30%; align: left;">
 
-<img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga3.png" alt="contraseña incorrecta" style = "width: 30%"></div>
+<img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea201/img/descarga3.png" alt="contraseña incorrecta" style = "width: 30%; align: right;"></div>
 
 
 * **``VentanaCrearUsuario.java``**:
