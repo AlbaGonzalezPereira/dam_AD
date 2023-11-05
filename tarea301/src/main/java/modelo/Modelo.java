@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
 import java.sql.ResultSet;
@@ -9,27 +5,38 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Modelo {
     
-    //private final Connection conn;
-    private final String usuario = "root";
-    private final String clave = "abc123.";
-    private final String url ="jdbc:mysql://localhost:3306/empleados";
+//    private final Connection conn;
+//    private final String usuario = "root";
+//    private final String clave = "";
+//    private final String url ="jdbc:mariadb://localhost/tarea301?allowPublicKeyRetrieval=true&useSSL=false;";
     public Modelo() throws SQLException{
-        //conn = DriverManager.getConnection(this.url, this.usuario,this.clave);
+//        conn = DriverManager.getConnection(this.url, this.usuario,this.clave);
+ try {
+            DB.open();
+            System.out.println("ok");
+        } catch (SQLException ex) {
+            System.out.println("Error en la conexión a la base de datos: " + ex.getMessage());
+        }
     }
     
-    public String obtenerDatosEmpleado(String numeroEmpleado){
+    public ArrayList<Socio> obtenerDatosSocios(){
         
-        String resultadoString = "sda";
+        try {
+            return SocioDAO.cargarSocios();
+            
 //        try {
 //            Statement stmt = conn.createStatement();
 //            
-//            ResultSet rs = stmt.executeQuery("select * from empleado where NSS = " + numeroEmpleado);
+//            ResultSet rs = stmt.executeQuery("select * from socios");
 //            while(rs.next()){
-//                resultadoString = "NSS: " + rs.getInt("NSS") + 
-//                                "\nNombre: " + rs.getString("Nombre") + 
+//                resultadoString = "NSS: " + rs.getInt("NSS") +
+//                                "\nNombre: " + rs.getString("Nombre") +
 //                                "\nApellido 1: " + rs.getString("Apel1") + 
 //                                 "\nApellido 2 : " + rs.getString("Apel2") +
 //                                 "\nSexo: " + rs.getString("Sexo") +
@@ -43,7 +50,11 @@ public class Modelo {
 //        } catch (SQLException ex) {
 //            return "Error: " + ex.toString();
 //        }
-        return resultadoString;
+        } catch (SQLException ex) {
+            //Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
+        }
+        return null;
     }
     
 }

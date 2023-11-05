@@ -8,11 +8,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class VentanaPrincipal extends JFrame{
+public class VentanaPrincipal extends JFrame implements Ventana{
     
         //private Controlador controlador;
 
 	private JPanel contentPane;
+        private JButton btnAlquilarLibro;
+        private JButton btnDevolverLibro;
+        private JButton btnLibrosDisponibles;
+        private JButton btnVerSocios;
+        private JButton btnLibrosAlquilados;
+        private JButton btnHistorico;
 
 	public VentanaPrincipal() {
                
@@ -25,31 +31,70 @@ public class VentanaPrincipal extends JFrame{
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		JButton btnAlquilarLibro = new JButton("Alquilar libro");
+                
+                /****************creamos los objetos button*******************/
+		btnAlquilarLibro = new JButton("Alquilar libro");
 		btnAlquilarLibro.setBounds(220, 57, 131, 23);
 		contentPane.add(btnAlquilarLibro);
-
-		JButton btnDevolverLibro = new JButton("Devolver libro");
+               
+		btnDevolverLibro = new JButton("Devolver libro");
 		btnDevolverLibro.setBounds(220, 91, 131, 23);
 		contentPane.add(btnDevolverLibro);
 
-		JButton btnLibrosDisponibles = new JButton("Ver libros disponibles");
+		btnLibrosDisponibles = new JButton("Ver libros disponibles");
 		btnLibrosDisponibles.setBounds(21, 91, 131, 23);
 		contentPane.add(btnLibrosDisponibles);
 
-		JButton btnVerSocios = new JButton("Ver socios");
+		btnVerSocios = new JButton("Ver socios");
 		btnVerSocios.setBounds(21, 57, 131, 23);
 		contentPane.add(btnVerSocios);
 
-		JButton btnLibrosAlquilados = new JButton("Ver libros alquilados");
+		btnLibrosAlquilados = new JButton("Ver libros alquilados");
 		btnLibrosAlquilados.setBounds(21, 130, 131, 23);
 		contentPane.add(btnLibrosAlquilados);
 
-		JButton btnHistorico = new JButton("Ver histórico");
+		btnHistorico = new JButton("Ver histórico");
 		btnHistorico.setBounds(220, 130, 131, 23);
 		contentPane.add(btnHistorico);
 	}
 
-   
+    public void agregarControlador(Controlador control) {
+        //agregamos a cada botón su contrador, ya que hicimos un controlador general
+        btnAlquilarLibro.addActionListener(control);
+        btnDevolverLibro.addActionListener(control);
+        btnHistorico.addActionListener(control);
+        btnLibrosDisponibles.addActionListener(control);
+        btnLibrosAlquilados.addActionListener(control);
+        btnVerSocios.addActionListener(control);
+    }
+
+    /*********************declaramos getters********************************/
+    public JButton getBtnAlquilarLibro() {
+        return btnAlquilarLibro;
+    }
+
+    public JButton getBtnDevolverLibro() {
+        return btnDevolverLibro;
+    }
+
+    public JButton getBtnLibrosDisponibles() {
+        return btnLibrosDisponibles;
+    }
+
+    public JButton getBtnVerSocios() {
+        return btnVerSocios;
+    }
+
+    public JButton getBtnLibrosAlquilados() {
+        return btnLibrosAlquilados;
+    }
+
+    public JButton getBtnHistorico() {
+        return btnHistorico;
+    }
+    
+    
+    public JButton getAlquilarLibro(){
+        return btnAlquilarLibro;
+    }
 }

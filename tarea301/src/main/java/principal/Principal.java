@@ -5,10 +5,11 @@
 
 package principal;
 
-import vista.Vista;
 import modelo.Modelo;
 import controlador.Controlador;
 import java.sql.SQLException;
+import vista.Ventana;
+import vista.VentanaPrincipal;
 
 /**
  *
@@ -20,7 +21,7 @@ public class Principal {
         // el modelo:
         Modelo modelo = new Modelo();
         // la vista:
-        Vista vista = new Vista();
+        Ventana vista = new VentanaPrincipal();
         // y el control:
         Controlador control = new Controlador (vista, modelo);
         
