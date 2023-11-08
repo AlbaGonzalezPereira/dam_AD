@@ -3,6 +3,8 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import modelo.Alquiler;
+import modelo.Libro;
 import modelo.Modelo;
 import modelo.Socio;
 import vista.Ventana;
@@ -29,10 +31,15 @@ public class Controlador implements ActionListener {
     public Controlador(Ventana vista, Modelo modelo) {
         ventanaPrincipal = new VentanaPrincipal();
         ventanaVerSocios= new VentanaVerSocios();
+        ventanaLibrosDisponibles = new VentanaLibrosDisponibles();
+        ventanaLibrosAlquilados = new VentanaLibrosAlquilados();
         this.vista = vista;
         this.modelo = modelo;
         ventanaPrincipal.agregarControlador(this);
         ventanaVerSocios.agregarControlador(this);
+        ventanaLibrosDisponibles.agregarControlador(this);
+        ventanaLibrosAlquilados.agregarControlador(this);
+        
     }
 
     public void ejecutar() {
@@ -55,10 +62,14 @@ public class Controlador implements ActionListener {
             System.out.println("Devolver libro");
         }
         else if(e.getSource().equals(ventanaPrincipal.getBtnLibrosAlquilados())){
-            System.out.println("Libros alquilados");
+            //System.out.println("Libros alquilados");
+            ventanaLibrosAlquilados.setVisible(true);
+            mostrarLibrosAlquilados();
         }
         else if(e.getSource().equals(ventanaPrincipal.getBtnLibrosDisponibles())){
-            System.out.println("Libros disponibles");
+            //System.out.println("Libros disponibles");
+            ventanaLibrosDisponibles.setVisible(true);
+            mostarLibrosDisponibles();
         }
         else if(e.getSource().equals(ventanaPrincipal.getBtnHistorico())){
             System.out.println("Ver historico");
@@ -83,5 +94,15 @@ public class Controlador implements ActionListener {
 
     private void limpiar(Ventana vista) {
         //TODO //vista.limpiar();
+    }
+
+    private void mostarLibrosDisponibles() {
+        ArrayList<Libro> librosDisp = modelo.obtenerLibrosDisponibles();
+        ventanaLibrosDisponibles.cargarDatos(librosDisp);
+    }
+
+    private void mostrarLibrosAlquilados() {
+        ArrayList<Alquiler> librosAlq = modelo.obtenerLibrosAlquilados();
+        ventanaLibrosAlquilados.cargarDatos(librosAlq);
     }
 }

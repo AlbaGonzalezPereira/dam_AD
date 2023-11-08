@@ -1,6 +1,8 @@
 package vista;
 
+import controlador.Controlador;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,8 +11,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import modelo.Libro;
 
-public class VentanaLibrosDisponibles extends JFrame {
+public class VentanaLibrosDisponibles extends JFrame implements Ventana {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -39,5 +42,26 @@ public class VentanaLibrosDisponibles extends JFrame {
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Codigo", "Titulo", "Autor" }));
 	}
+
+    @Override
+    public void agregarControlador(Controlador control) {
+        
+    }
+
+    public void limpiar(){
+        System.out.println("limpiando");
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0); // eliminamos todas las filas de la tabla
+    }
+    
+    public void cargarDatos(ArrayList<Libro> librosDisp) {
+        limpiar();
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        for (Libro libro : librosDisp) {
+            model.addRow(new Object[]{libro.getCodigo(), libro.getTitulo(), libro.getAutor()});
+
+        }
+        
+    }
 
 }

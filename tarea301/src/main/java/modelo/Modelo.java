@@ -57,4 +57,25 @@ public class Modelo {
         return null;
     }
     
+    public ArrayList<Libro> obtenerLibrosDisponibles(){
+        
+        try {
+            return LibroDAO.cargarLibrosDisponibles();           
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+
+    public ArrayList<Alquiler> obtenerLibrosAlquilados() {
+        try {
+            return AlquilerDAO.cargarLibrosAlquilados();           
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+    
+    
+    
 }

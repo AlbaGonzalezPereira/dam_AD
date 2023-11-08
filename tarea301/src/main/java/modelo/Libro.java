@@ -11,13 +11,19 @@ package modelo;
 public class Libro {
     private String codigo;
     private String titulo;
-    private int idAutor;
+    private String autor;
 
-    public Libro(String codigo, String titulo, int idAutor) {
+    public Libro(String codigo, String titulo, String idAutor) {
         this.codigo = codigo;
         this.titulo = titulo;
-        this.idAutor = idAutor;
+        this.autor = idAutor;
     }
+
+    public Libro(String codigo, String titulo) {
+        this.codigo = codigo;
+        this.titulo = titulo;
+    }
+    
 
     public String getCodigo() {
         return codigo;
@@ -35,13 +41,14 @@ public class Libro {
         this.titulo = titulo;
     }
 
-    public int getIdAutor() {
-        return idAutor;
+    public String getAutor() {
+        return autor;
     }
 
-    public void setIdAutor(int idAutor) {
-        this.idAutor = idAutor;
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
+
     
     
 }
