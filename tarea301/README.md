@@ -37,5 +37,5 @@ establecer un nombre para saber quien lanzó el evento: ``nombreBoton.setActionC
 * La cadena ``NOMBREBOTON`` tendrá que ser única para cada botón para evitar confundirlos.
 
 # **Imágenes**
-<div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea301/img1.PNG" alt="Imagen aplicación" style = "width: 80%; margin:0 auto;"><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea301/img2.PNG" alt="Imagen aplicación" style = "width: 80%; margin:0 auto"></div>
-<div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea301/img2.PNG" alt="Imagen aplicación" style = "width: 80%"></div>
+<div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea301/img1.PNG" alt="Imagen aplicación" style = "width: 80%;"></div>
+<div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea301/img2.PNG" alt="Imagen aplicación" style = "width: 80%;"></div>
