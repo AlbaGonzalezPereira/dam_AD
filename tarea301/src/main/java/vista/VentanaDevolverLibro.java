@@ -11,6 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * clase de la interfaz VentanaDevolverLibro
+ * @author alba_
+ */
 public class VentanaDevolverLibro extends JFrame implements Ventana{
 
 	private JPanel contentPane;
@@ -52,6 +56,7 @@ public class VentanaDevolverLibro extends JFrame implements Ventana{
 		contentPane.add(btnCancelar);
 	}
 
+    //insertamos getters
     public JButton getBtnDevolver() {
         return btnDevolver;
     }
@@ -64,12 +69,19 @@ public class VentanaDevolverLibro extends JFrame implements Ventana{
         return textCodigo.getText();
     }
 
+    /**
+     * método que añade a los botones una escucha
+     * @param control 
+     */
     @Override
     public void agregarControlador(Controlador control) {
         btnDevolver.addActionListener(control);
         btnCancelar.addActionListener(control);
     }
     
+    /**
+     * método que limpia el campo de código
+     */
     public void limpiar(){
         textCodigo.setText("");
     }

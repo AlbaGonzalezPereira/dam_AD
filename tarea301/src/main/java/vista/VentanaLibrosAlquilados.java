@@ -13,6 +13,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import modelo.Alquiler;
 
+/**
+ * clase de la interfaz VentanaLibrosAlquilados
+ * @author alba_
+ */
 public class VentanaLibrosAlquilados extends JFrame implements Ventana{
 
 	private JPanel contentPane;
@@ -48,19 +52,24 @@ public class VentanaLibrosAlquilados extends JFrame implements Ventana{
 
     }
 
+    /**
+     * método que limpia la tabla
+     */
     public void limpiar(){
-        System.out.println("limpiando");
+        //System.out.println("limpiando");//comprobamos
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0); // eliminamos todas las filas de la tabla
     }
     
+    /**
+     * método que carga los datos en la tabla
+     * @param librosAlquilados 
+     */
     public void cargarDatos(ArrayList<Alquiler> librosAlquilados) {
         limpiar();
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         for (Alquiler alquiler : librosAlquilados) {
             model.addRow(new Object[]{alquiler.getLibro().getCodigo(), alquiler.getLibro().getTitulo(), alquiler.getDniSocio(),alquiler.getFechaAlquiler()});
-
-        }
-        
+        }       
     }
 }

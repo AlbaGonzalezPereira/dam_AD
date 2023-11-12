@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
 /**
- *
+ * clase que hace referencia a la tabla socios de la base de datos donde 
+ * muestra el registro de todos los socios
  * @author alba_
  */
 public class Socio {
@@ -13,12 +10,14 @@ public class Socio {
     private String nombre;
     private String apellidos;
 
+    //insertamos el constructor
     public Socio(String dni, String nombre, String apellidos) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellidos = apellidos;
     }
 
+    //insertamos getters y setters
     public String getDni() {
         return dni;
     }

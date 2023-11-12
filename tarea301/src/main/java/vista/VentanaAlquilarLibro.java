@@ -11,6 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * clase de la interfaz VentanaAlquilarLibro
+ * @author alba_
+ */
 public class VentanaAlquilarLibro extends JFrame implements Ventana {
 
 	private JPanel contentPane;
@@ -77,28 +81,36 @@ public class VentanaAlquilarLibro extends JFrame implements Ventana {
         return textCodigo.getText();
     }
 
-    public void limpiar() {
-        textCodigo.setText("");
-        textDNI.setText("");
-    }
-
     public String getTextDNI() {
         return textDNI.getText();
     }
 
-        
+    /**
+     * método que nos vacía los campos de código y dni
+     */
+    public void limpiar() {
+        textCodigo.setText("");
+        textDNI.setText("");
+    }
+    
+    /**
+     * método que añade a los botones una escucha
+     * @param control 
+     */
     @Override
     public void agregarControlador(Controlador control) {
         //añadimos los actionListener a los botones para "escuchar" el evento
         btnAlquilar.addActionListener(control);
-        btnCancelar.addActionListener(control);
-        
+        btnCancelar.addActionListener(control);     
     }
 
+    /**
+     * método que muestra la advertencia en un pop up
+     */
     public void mostrarAdvertencia() {
         JOptionPane.showMessageDialog(contentPane, "No se puede alquilar el libro con ese código",
 					"Advertencia", JOptionPane.WARNING_MESSAGE);
     }
 
-   
+
 }

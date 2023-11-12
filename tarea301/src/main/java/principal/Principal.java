@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
- */
-
 package principal;
 
 import modelo.Modelo;
@@ -12,23 +7,20 @@ import vista.Ventana;
 import vista.VentanaPrincipal;
 
 /**
- *
- * @author Juan
+ * Clase principal donde se crea el Modelo, la Vista y el Controlador e inicia el
+ * programa
+ * @author alba_
  */
 public class Principal {
 
     public static void main(String[] args) throws SQLException {
-        // el modelo:
+        // creamos el modelo:
         Modelo modelo = new Modelo();
-        // la vista:
+        // creamos la vista:
         Ventana vista = new VentanaPrincipal();
-        // y el control:
+        // y el controlador:
         Controlador control = new Controlador (vista, modelo);
-        
+        //iniciamos el programa
         control.ejecutar();
-        // y arranca la interfaz (vista):
-        //vista.arrancar();
-        // configura la vista
-        //vista.setControlador(control);
     }
 }

@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
+ * clase que permite la conexión a la base de datos y que usa el patrón singleton
  * @author alba_
  */
 

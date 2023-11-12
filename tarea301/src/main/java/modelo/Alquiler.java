@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
 import java.util.Date;
 
 /**
- *
+ * clase que hace referencia a la tabla alquiler de la base de datos donde 
+ * muestra el registro de todos los alquileres de los libros
  * @author alba_
  */
 public class Alquiler {
@@ -29,8 +26,7 @@ public class Alquiler {
         this(fechaAlquiler,dniSocio, libro);//llamamos al constructor anterior
         this.fechaDevolucion = fechaDevolucion;    
     }
-    
-    
+       
     //añadimos getters y setters necesarios
     public Libro getLibro() {
         return libro;
@@ -79,8 +75,5 @@ public class Alquiler {
     public void setCodigoLibro(String codigoLibro) {
         this.codigoLibro = codigoLibro;
     }
-    
-    
-    
-    
+  
 }

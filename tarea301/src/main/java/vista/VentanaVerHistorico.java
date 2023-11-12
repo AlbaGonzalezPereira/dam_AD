@@ -14,6 +14,10 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Alquiler;
 import modelo.Socio;
 
+/**
+ * clase de la interfaz VentanaVerHistorico
+ * @author alba_
+ */
 public class VentanaVerHistorico extends JFrame implements Ventana{
 
 	private JPanel contentPane;
@@ -52,8 +56,11 @@ public class VentanaVerHistorico extends JFrame implements Ventana{
         
     }
     
+    /**
+     * método que nos limpia la tabla
+     */
     public void limpiar(){
-        System.out.println("limpiando");
+        //System.out.println("limpiando");//comprobamos
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0); // eliminamos todas las filas de la tabla
     }
@@ -69,5 +76,4 @@ public class VentanaVerHistorico extends JFrame implements Ventana{
             model.addRow(new Object[]{alquiler.getLibro().getCodigo(), alquiler.getDniSocio(), alquiler.getFechaAlquiler(), alquiler.getFechaDevolucion()});
         }
     }
-
 }

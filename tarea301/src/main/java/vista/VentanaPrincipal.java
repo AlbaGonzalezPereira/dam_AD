@@ -1,13 +1,15 @@
 package vista;
 
 import controlador.Controlador;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * clase que muestra la ventana principal del programa
+ * @author alba_
+ */
 public class VentanaPrincipal extends JFrame implements Ventana{
     
         //private Controlador controlador;
@@ -58,6 +60,11 @@ public class VentanaPrincipal extends JFrame implements Ventana{
 		contentPane.add(btnHistorico);
 	}
 
+    /**
+     * método que añade a los botones una escucha
+     * @param control 
+     */
+        @Override
     public void agregarControlador(Controlador control) {
         //agregamos a cada botón su contrador, ya que hicimos un controlador general
         btnAlquilarLibro.addActionListener(control);
@@ -92,7 +99,6 @@ public class VentanaPrincipal extends JFrame implements Ventana{
     public JButton getBtnHistorico() {
         return btnHistorico;
     }
-    
     
     public JButton getAlquilarLibro(){
         return btnAlquilarLibro;

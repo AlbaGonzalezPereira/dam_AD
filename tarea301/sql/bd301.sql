@@ -32,17 +32,17 @@ CREATE TABLE IF NOT EXISTS `alquiler` (
   KEY `codigoLibro` (`codigoLibro`),
   CONSTRAINT `FK_libro_alquiler` FOREIGN KEY (`codigoLibro`) REFERENCES `libros` (`codigo`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `FK_socio_alquiler` FOREIGN KEY (`dniSocio`) REFERENCES `socios` (`DNI`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla tarea301.alquiler: ~6 rows (aproximadamente)
 DELETE FROM `alquiler`;
 INSERT INTO `alquiler` (`id`, `fechaAlquiler`, `fechaDevolucion`, `dniSocio`, `codigoLibro`) VALUES
-	(1, '2021-11-05', '2023-11-12', '12345678J', 'a0001'),
 	(2, '2022-11-05', '2023-11-05', '98765432A', 'a0002'),
 	(3, '2023-11-08', '2023-11-08', '12345678J', 'a0002'),
 	(10, '2023-11-11', '2023-11-12', '98765432A', 'a0002'),
-	(11, '2023-11-12', '2023-11-12', '98765432A', 'a0003'),
-	(12, '2023-11-12', NULL, '12345678J', 'a0003');
+	(14, '2023-11-12', NULL, '98765432A', 'a0003'),
+	(15, '2023-11-12', '2023-11-12', '12345678J', 'a0001'),
+	(16, '2023-11-12', NULL, '98765432A', 'a0001');
 
 -- Volcando estructura para tabla tarea301.libros
 CREATE TABLE IF NOT EXISTS `libros` (
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `libros` (
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla tarea301.libros: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla tarea301.libros: ~3 rows (aproximadamente)
 DELETE FROM `libros`;
 INSERT INTO `libros` (`codigo`, `titulo`, `autor`) VALUES
 	('a0001', 'El señor de las abejas', 'Jose Luis'),

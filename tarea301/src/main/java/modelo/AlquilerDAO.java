@@ -8,11 +8,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- *
+ * clase que contiene los métodos de consulta a la base de datos de la clase Alquiler 
  * @author alba_
  */
 public class AlquilerDAO {
 
+    /**
+     * método que nos devuelve los libros alquilados y lanza una excepción en caso de error
+     * @return - alquileres
+     * @throws SQLException 
+     */
     public static ArrayList<Alquiler> cargarLibrosAlquilados() throws SQLException {
         String sql = "SELECT l.codigo, l.titulo, a.dniSocio, a.fechaAlquiler,a.fechaDevolucion"
                 + " FROM libros l"
@@ -31,8 +36,14 @@ public class AlquilerDAO {
         return alquilados;
     }
 
+    /**
+     * método que permite devolver un libro alquilado
+     * @param codigo
+     * @return - nº filas afectadas
+     * @throws SQLException
+     * @throws CodeNotFoundException 
+     */
     public static int devolverLibro(String codigo) throws SQLException, CodeNotFoundException {
-//        String sql = "UPDATE alquiler SET fechaDevolucion=? WHERE codigoLibro=codigo AND fechaDevolucion=null;";
         ArrayList<Alquiler> librosAlquilados = AlquilerDAO.cargarLibrosAlquilados();
         boolean encontrado = false;
         for (Alquiler librosAlquilado : librosAlquilados) {
@@ -42,16 +53,21 @@ public class AlquilerDAO {
         }
         if (!encontrado) {
             throw new CodeNotFoundException();//lanzamos la excepción
-        }            //return -1;
+        }  
+        //declaramos la consulta
         String sql = "UPDATE alquiler SET fechaDevolucion=(SELECT CURDATE() AS ‘DateAndTime’) WHERE codigoLibro=? AND fechaDevolucion IS NULL;";
 
         try ( Connection con = DB.getConnection();  PreparedStatement stmt = con.prepareStatement(sql);) {
             stmt.setString(1, codigo);
-            return stmt.executeUpdate();
+            return stmt.executeUpdate();//devuelve el número de registros (filas) afectadas
         }
-
     }
 
+    /**
+     * método que nos devuelve el histórico (los registros) de los alquileres
+     * @return - ArrayList con los alquileres
+     * @throws SQLException 
+     */
     public static ArrayList<Alquiler> obtenerHistorico() throws SQLException {
         String sql = "SELECT codigoLibro, dniSocio, fechaAlquiler, fechaDevolucion FROM alquiler;";
         ArrayList<Alquiler> historicos = new ArrayList<>();
@@ -64,6 +80,5 @@ public class AlquilerDAO {
             }
         }
         return historicos;
-
     }
 }

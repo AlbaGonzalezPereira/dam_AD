@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
 /**
- *
+ * clase que hace referencia a la tabla libros de la base de datos donde 
+ * muestra el registro de todos los libros
  * @author alba_
  */
 public class Libro {
@@ -13,7 +10,7 @@ public class Libro {
     private String titulo;
     private String autor;
 
-    //creamos los constructores necesarios
+    //insertamos los constructores necesarios
     public Libro(String codigo, String titulo, String idAutor) {
         this.codigo = codigo;
         this.titulo = titulo;
@@ -54,7 +51,5 @@ public class Libro {
     public void setAutor(String autor) {
         this.autor = autor;
     }
-
-    
-    
+   
 }

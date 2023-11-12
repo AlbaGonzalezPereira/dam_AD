@@ -13,6 +13,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import modelo.Libro;
 
+/**
+ * clase de la interfaz VentanaLibrosDisponibles
+ * @author alba_
+ */
 public class VentanaLibrosDisponibles extends JFrame implements Ventana {
 
 	private JPanel contentPane;
@@ -48,20 +52,24 @@ public class VentanaLibrosDisponibles extends JFrame implements Ventana {
         
     }
 
+    /**
+     * método que limpia la tabla
+     */
     public void limpiar(){
-        System.out.println("limpiando");
+        //System.out.println("limpiando");//comprobamos
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0); // eliminamos todas las filas de la tabla
     }
     
+    /**
+     * método que carga los datos en la tabla
+     * @param librosDisp 
+     */
     public void cargarDatos(ArrayList<Libro> librosDisp) {
         limpiar();
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         for (Libro libro : librosDisp) {
             model.addRow(new Object[]{libro.getCodigo(), libro.getTitulo(), libro.getAutor()});
-
-        }
-        
+        }        
     }
-
 }

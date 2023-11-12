@@ -4,57 +4,42 @@ import exception.CodeNotFoundException;
 import exception.HireNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+/**
+ * clase que realiza operaciones con la base de datos y contiene métodos para que
+ * el controlador acceda a ellos
+ * @author alba_
+ */
 public class Modelo {
 
-//    private final Connection conn;
-//    private final String usuario = "root";
-//    private final String clave = "";
-//    private final String url ="jdbc:mariadb://localhost/tarea301?allowPublicKeyRetrieval=true&useSSL=false;";
+    //insertamos el constructor
     public Modelo() throws SQLException {
-//        conn = DriverManager.getConnection(this.url, this.usuario,this.clave);
         try {
             DB.open();
-            System.out.println("ok");
+            //System.out.println("ok");//comprobamos
         } catch (SQLException ex) {
             System.out.println("Error en la conexión a la base de datos: " + ex.getMessage());
         }
     }
 
+    /**
+     * método que nos devuelve los datos de los socios
+     * @return - ArrayLis de Socio
+     */
     public ArrayList<Socio> obtenerDatosSocios() {
-
         try {
             return SocioDAO.cargarSocios();
 
-//        try {
-//            Statement stmt = conn.createStatement();
-//            
-//            ResultSet rs = stmt.executeQuery("select * from socios");
-//            while(rs.next()){
-//                resultadoString = "NSS: " + rs.getInt("NSS") +
-//                                "\nNombre: " + rs.getString("Nombre") +
-//                                "\nApellido 1: " + rs.getString("Apel1") + 
-//                                 "\nApellido 2 : " + rs.getString("Apel2") +
-//                                 "\nSexo: " + rs.getString("Sexo") +
-//                                 "\nDirección: " + rs.getString("Dirección") +
-//                                 "\nFecha nacimiento: " + rs.getString("Fechanac") +
-//                                 "\nSalario: " + rs.getString("Salario") +
-//                                 "\nNúm. departamento: " + rs.getString("Numdept") +
-//                                 "\nNSSsup: " + rs.getString("NSSsup");
-//            }
-//            conn.close();
-//        } catch (SQLException ex) {
-//            return "Error: " + ex.toString();
-//        }
         } catch (SQLException ex) {
-            //Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex.getMessage());
         }
         return null;
     }
 
+    /**
+     * método que nos devuelve los libros disponibles
+     * @return - ArrayLis de libro
+     */
     public ArrayList<Libro> obtenerLibrosDisponibles() {
 
         try {
@@ -65,6 +50,10 @@ public class Modelo {
         return null;
     }
 
+    /**
+     * método que nos devuelve los libros alquilados
+     * @return - ArrayList de Alquiler
+     */
     public ArrayList<Alquiler> obtenerLibrosAlquilados() {
         try {
             return AlquilerDAO.cargarLibrosAlquilados();
@@ -74,6 +63,13 @@ public class Modelo {
         return null;
     }
 
+    /**
+     * método que nos permite alquilar un libro
+     * @param dni - dni socio
+     * @param codigo - código del libro
+     * @return - nº de libros alquilados
+     * @throws HireNotFoundException 
+     */
     public int anhadirLibroAlquilado(String dni, String codigo) throws HireNotFoundException {
         try {
             return LibroDAO.alquilarLibro(codigo, dni);
@@ -83,6 +79,12 @@ public class Modelo {
         return -1;
     }
 
+    /**
+     * método que nos permite devolver un libro alquilado
+     * @param codigo - código del libro alquilado
+     * @return - nº de libros alquilados
+     * @throws CodeNotFoundException 
+     */
     public int devolverLibroAlquilado(String codigo) throws CodeNotFoundException {
         try {
             return AlquilerDAO.devolverLibro(codigo);
@@ -92,6 +94,10 @@ public class Modelo {
         return -1;
     }
     
+    /**
+     * método que nos permite obtener el listado de los libros alquilados
+     * @return - ArrayList de alquileres
+     */
     public ArrayList<Alquiler> obtenerHistoricosAlquiler() {
         try {
             return AlquilerDAO.obtenerHistorico();

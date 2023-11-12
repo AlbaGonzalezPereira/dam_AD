@@ -13,6 +13,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import modelo.Socio;
 
+/**
+ * clase de la interfaz VentanaVerSocios
+ * @author alba_
+ */
 public class VentanaVerSocios extends JFrame implements Ventana{
 
 	private JPanel contentPane;
@@ -44,11 +48,14 @@ public class VentanaVerSocios extends JFrame implements Ventana{
 	}
 
     @Override
-    public void agregarControlador(Controlador control) {
-        
+    public void agregarControlador(Controlador control) {     
     }
+    
+    /**
+     * método que limpia los datos en la tabla
+     */
     public void limpiar(){
-        System.out.println("limpiando");
+        //System.out.println("limpiando");//comprobamos
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0); // eliminamos todas las filas de la tabla
     }
@@ -62,8 +69,6 @@ public class VentanaVerSocios extends JFrame implements Ventana{
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         for (Socio socio : socios) {
             model.addRow(new Object[]{socio.getDni(), socio.getNombre(), socio.getApellidos()});
-
         }
-// Añadir una fila con los datos del nuevo socio
     }
 }
