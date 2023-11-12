@@ -2,7 +2,7 @@
 En este proyecto desarrollareis una aplicación que permita gestionar los alquileres de libros de una biblioteca. La biblioteca consta de varios socios y libros.
 
 Información a almacenar
-<div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea301/tabla.png" alt="Inicio de sesión" style = "width: 40%"></div>
+<div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea301/tabla.PNG" alt="tabla datos" style = "width: 30%"></div>
 
 Un socio puede alquilar los libros que quiera, dentro de los libros que hay disponibles. También puede devolverlos cuando quiera.
 
@@ -36,5 +36,5 @@ establecer un nombre para saber quien lanzó el evento: ``nombreBoton.setActionC
 * La cadena ``NOMBREBOTON`` tendrá que ser única para cada botón para evitar confundirlos.
 
 # **Imágenes**
-<div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea301/tabla.png" alt="Inicio de sesión" style = "width: 40%"></div>
-<div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea301/tabla.png" alt="Inicio de sesión" style = "width: 40%"></div>
+<div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea301/img1.PNG" alt="Imagen aplicación" style = "width: 40%"></div>
+<div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/main/tarea301/img2.PNG" alt="Imagen aplicación" style = "width: 40%"></div>
