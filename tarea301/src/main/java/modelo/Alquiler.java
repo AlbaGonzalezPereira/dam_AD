@@ -18,12 +18,20 @@ public class Alquiler {
     private String codigoLibro;
     private Libro libro;
 
+    //insertamos constructores necesarios
     public Alquiler(Date fechaAlquiler, String dniSocio, Libro libro) {
         this.fechaAlquiler = fechaAlquiler;
         this.dniSocio = dniSocio;
         this.libro = libro;
     }
 
+    public Alquiler(Date fechaAlquiler, Date fechaDevolucion, String dniSocio, Libro libro) {
+        this(fechaAlquiler,dniSocio, libro);//llamamos al constructor anterior
+        this.fechaDevolucion = fechaDevolucion;    
+    }
+    
+    
+    //añadimos getters y setters necesarios
     public Libro getLibro() {
         return libro;
     }

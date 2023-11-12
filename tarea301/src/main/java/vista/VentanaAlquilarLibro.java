@@ -1,19 +1,24 @@
 package vista;
 
+import controlador.Controlador;
 import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class VentanaAlquilarLibro extends JFrame {
+public class VentanaAlquilarLibro extends JFrame implements Ventana {
 
 	private JPanel contentPane;
 	private JTextField textCodigo;
 	private JTextField textDNI;
+        //declaramos los botones Alquilar y Cancelar
+        private JButton btnCancelar;
+        private JButton btnAlquilar;
 
 	public VentanaAlquilarLibro() {
 		setTitle("APP BIBLIOTECA");
@@ -50,12 +55,50 @@ public class VentanaAlquilarLibro extends JFrame {
 		lblDni.setBounds(117, 136, 74, 14);
 		contentPane.add(lblDni);
 
-		JButton btnAlquilar = new JButton("Alquilar");
+		btnAlquilar = new JButton("Alquilar");
 		btnAlquilar.setBounds(306, 227, 89, 23);
 		contentPane.add(btnAlquilar);
 
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(26, 227, 89, 23);
 		contentPane.add(btnCancelar);
 	}
+        
+    //insertamos los getters y setters necesarios
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public JButton getBtnAlquilar() {
+        return btnAlquilar;
+    }
+
+    public String getTextCodigo() {
+        return textCodigo.getText();
+    }
+
+    public void limpiar() {
+        textCodigo.setText("");
+        textDNI.setText("");
+    }
+
+    public String getTextDNI() {
+        return textDNI.getText();
+    }
+
+        
+    @Override
+    public void agregarControlador(Controlador control) {
+        //añadimos los actionListener a los botones para "escuchar" el evento
+        btnAlquilar.addActionListener(control);
+        btnCancelar.addActionListener(control);
+        
+    }
+
+    public void mostrarAdvertencia() {
+        JOptionPane.showMessageDialog(contentPane, "No se puede alquilar el libro con ese código",
+					"Advertencia", JOptionPane.WARNING_MESSAGE);
+    }
+
+   
 }

@@ -1,6 +1,8 @@
 package vista;
 
+import controlador.Controlador;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,8 +11,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import modelo.Alquiler;
+import modelo.Socio;
 
-public class VentanaVerHistorico extends JFrame {
+public class VentanaVerHistorico extends JFrame implements Ventana{
 
 	private JPanel contentPane;
 	private JTable table;
@@ -42,5 +46,28 @@ public class VentanaVerHistorico extends JFrame {
 		table.getColumnModel().getColumn(2).setPreferredWidth(95);
 		table.getColumnModel().getColumn(3).setPreferredWidth(106);
 	}
+
+    @Override
+    public void agregarControlador(Controlador control) {
+        
+    }
+    
+    public void limpiar(){
+        System.out.println("limpiando");
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0); // eliminamos todas las filas de la tabla
+    }
+    
+    /**
+     * método para cargar datos en la tabla histórico
+     * @param alquileres 
+     */
+    public void cargarDatos(ArrayList<Alquiler> alquileres){
+        limpiar(); //limpiamos para que no carguen duplicados
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        for (Alquiler alquiler : alquileres) {
+            model.addRow(new Object[]{alquiler.getLibro().getCodigo(), alquiler.getDniSocio(), alquiler.getFechaAlquiler(), alquiler.getFechaDevolucion()});
+        }
+    }
 
 }

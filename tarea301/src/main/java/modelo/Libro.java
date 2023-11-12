@@ -13,6 +13,7 @@ public class Libro {
     private String titulo;
     private String autor;
 
+    //creamos los constructores necesarios
     public Libro(String codigo, String titulo, String idAutor) {
         this.codigo = codigo;
         this.titulo = titulo;
@@ -23,8 +24,13 @@ public class Libro {
         this.codigo = codigo;
         this.titulo = titulo;
     }
-    
 
+    public Libro(String codigo) {
+        this.codigo = codigo;
+    }
+    
+    
+    //insertamos getters y setters
     public String getCodigo() {
         return codigo;
     }

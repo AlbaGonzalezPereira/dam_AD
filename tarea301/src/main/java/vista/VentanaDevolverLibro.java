@@ -1,18 +1,22 @@
 package vista;
 
+import controlador.Controlador;
 import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class VentanaDevolverLibro extends JFrame {
+public class VentanaDevolverLibro extends JFrame implements Ventana{
 
 	private JPanel contentPane;
 	private JTextField textCodigo;
+        private JButton btnDevolver;
+        private JButton btnCancelar;
 
 	public VentanaDevolverLibro() {
 		setTitle("APP BIBLIOTECA");
@@ -39,13 +43,43 @@ public class VentanaDevolverLibro extends JFrame {
 		lblCodigo.setBounds(127, 104, 70, 17);
 		contentPane.add(lblCodigo);
 
-		JButton btnDevolver = new JButton("Devolver");
+		btnDevolver = new JButton("Devolver");
 		btnDevolver.setBounds(294, 178, 89, 23);
 		contentPane.add(btnDevolver);
 
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(51, 178, 89, 23);
 		contentPane.add(btnCancelar);
 	}
+
+    public JButton getBtnDevolver() {
+        return btnDevolver;
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public String getTextCodigo() {
+        return textCodigo.getText();
+    }
+
+    @Override
+    public void agregarControlador(Controlador control) {
+        btnDevolver.addActionListener(control);
+        btnCancelar.addActionListener(control);
+    }
+    
+    public void limpiar(){
+        textCodigo.setText("");
+    }
+
+    /**
+     * método que muestra la advertencia cuando no se puede devolver un libro
+     */
+    public void mostrarAdvertencia() {
+        JOptionPane.showMessageDialog(contentPane, "No se puede devolver el libro con ese codigo",
+					"Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
 
 }
