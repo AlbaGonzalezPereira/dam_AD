@@ -7,7 +7,6 @@ Información a almacenar
 
 Un socio puede alquilar los libros que quiera, dentro de los libros que hay disponibles. También puede devolverlos cuando quiera.
 
-
 # **Funcionalidades de la aplicación**
 La aplicación debe permitir:
 
