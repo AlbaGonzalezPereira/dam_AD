@@ -6,7 +6,8 @@ En este proyecto vamos a desarrollar una aplicación que permita gestionar diver
 
 El diagrama conceptual de la base de datos es el siguiente:
 
-<div align = center><img src="tarea401/bbdd.png" alt="base de datos" style = "width: 50%"></div>
+<div align = center><img src="https://github.com/AlbaGonzalezPereira/dam_AD/blob/4d2aa5f24f79d9a01a239bb7ac2e7b35800d09ef/tarea401/bbdd.png" alt="base de datos" style = "width: 50%"></div>
+
 
 Teniendo en cuenta que:
 
