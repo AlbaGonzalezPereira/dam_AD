@@ -10,6 +10,9 @@ public class Equipo {
     private String ciudad;
     private Persona entrenador;
 
+    public Equipo() {
+    }
+    
     public Equipo(int equipo_id, String nombre, String ciudad, Persona entrenador) {
         this.equipo_id = equipo_id;
         this.nombre = nombre;

@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -101,64 +100,64 @@ public class Principal {
                         System.out.println("Salir");
                         break;
                     case 1:
-                        insertarEquipo();
+                        insertarEquipo(conexion);
                         break;
                     case 2:
-                        modificarEquipo();
+                        modificarEquipo(conexion);
                         break;
                     case 3:
-                        eliminarEquipo();
+                        eliminarEquipo(conexion);
                         break;
                     case 4:
-
+                        insertarJugador(conexion);
                         break;
                     case 5:
-
+                        modificarJugador(conexion);
                         break;
                     case 6:
-
+                        eliminarJugador(conexion);
                         break;
                     case 7:
-
+                        insertarPartido(conexion);
                         break;
                     case 8:
-
+                        modificarPartido(conexion);
                         break;
                     case 9:
-
+                        eliminarPartido(conexion);
                         break;
                     case 10:
-
+                        inscribirJugador(conexion);
                         break;
                     case 11:
-
+                        desinscribirJugador(conexion);
                         break;
                     case 12:
-
+                        listarEquipoId(conexion);
                         break;
                     case 13:
-
+                        listarEquipos(conexion);
                         break;
                     case 14:
-
+                        listarJugadorId(conexion);
                         break;
                     case 15:
-
+                        listarJugadorNombre(conexion);
                         break;
                     case 16:
-
+                        listarPartidosLocal(conexion);
                         break;
                     case 17:
-
+                        listarPartidosVisitante(conexion);
                         break;
                     case 18:
-
+                        listarJugadoresPosicion(conexion);
                         break;
                     case 19:
-
+                        listarJugadoresDorsal(conexion);
                         break;
                     case 20:
-
+                        listarPartidosFecha(conexion);
                         break;
 
                     default:
@@ -175,4 +174,183 @@ public class Principal {
          */
     }
 
+    private static void insertarEquipo(Connection conexion) {
+        System.out.println("Introduce el nombre del equipo: ");
+        String nombre = sc.nextLine();
+        System.out.println("Introduce la localidad del equipo: ");
+        String localidad = sc.nextLine();
+        System.out.println("Introduce el nombre del entrenador: ");
+        String nombre_entrenador = sc.nextLine();
+        System.out.println("Introduce la edad del entrenador: ");
+        int edad_entrenador = Integer.parseInt(sc.nextLine());
+        Equipo equipo = new Equipo(nombre, localidad, new Persona(nombre_entrenador, edad_entrenador));
+        EquipoDAO.insertarEquipo(equipo, conexion);
+    }
+
+    private static void modificarEquipo(Connection conexion) {
+        System.out.println("Introduce el id del equipo a modificar: ");
+        int id = Integer.parseInt(sc.nextLine());
+        System.out.println("Introduce el nuevo nombre del equipo: ");
+        String nombre = sc.nextLine();
+        System.out.println("Introduce la nueva localidad del equipo: ");
+        String localidad = sc.nextLine();
+        System.out.println("Introduce el nuevo nombre del entrenador: ");
+        String nombre_entrenador = sc.nextLine();
+        System.out.println("Introduce la nueva edad del entrenador: ");
+        int edad_entrenador = Integer.parseInt(sc.nextLine());
+        Equipo equipo = new Equipo(nombre, localidad, new Persona(nombre_entrenador, edad_entrenador));
+        equipo.setEquipo_id(id);
+        EquipoDAO.modificarEquipo(equipo, conexion);
+    }
+
+    private static void eliminarEquipo(Connection conexion) {
+        System.out.println("Introduce el id del equipo a eliminar: ");
+        int id = Integer.parseInt(sc.nextLine());
+        EquipoDAO.eliminarEquipo(id, conexion);
+    }
+
+    private static void insertarJugador(Connection conexion) {
+        System.out.println("Introduce el nombre del jugador: ");
+        String nombre = sc.nextLine();
+        System.out.println("Introduce la edad del jugador: ");
+        int edad = Integer.parseInt(sc.nextLine());
+        System.out.println("Introduce la posición del jugador: ");
+        String posicion = sc.nextLine();
+        System.out.println("Introduce la altura del jugador: ");
+        float altura = Float.parseFloat(sc.nextLine());
+        Jugador jugador = new Jugador(edad, posicion, altura);
+        Jugadores j = new Jugadores(new Persona(nombre, edad), jugador);
+        JugadorDAO.insertarJugador(j, conexion);
+    }
+
+    private static void modificarJugador(Connection conexion) {
+        System.out.println("Introduce el id del jugador a modificar: ");
+        int id = Integer.parseInt(sc.nextLine());
+        System.out.println("Introduce el nuevo nombre del jugador: ");
+        String nombre = sc.nextLine();
+        System.out.println("Introduce la nueva edad del jugador: ");
+        int edad = Integer.parseInt(sc.nextLine());
+        System.out.println("Introduce la nueva posición del jugador: ");
+        String posicion = sc.nextLine();
+        System.out.println("Introduce la nueva altura del jugador: ");
+        float altura = Float.parseFloat(sc.nextLine());
+        Jugador jugador = new Jugador(edad, posicion, altura);
+        Jugadores j = new Jugadores(new Persona(nombre, edad), jugador);
+        j.setJugador_id(id);
+        JugadorDAO.modificarJugador(j, conexion);
+    }
+
+    private static void eliminarJugador(Connection conexion) {
+        System.out.println("Introduce el id del jugador a eliminar: ");
+        int id = Integer.parseInt(sc.nextLine());
+        JugadorDAO.eliminarJugador(id, conexion);
+    }
+
+    private static void insertarPartido(Connection conexion) {
+        System.out.println("Introduce la fecha del partido (yyyy-mm-dd): ");
+        String fecha = sc.nextLine();
+        LocalDate fecha_partido = LocalDate.parse(fecha);
+        System.out.println("Introduce el id del equipo local: ");
+        int id_local = Integer.parseInt(sc.nextLine());
+        System.out.println("Introduce el id del equipo visitante: ");
+        int id_visitante = Integer.parseInt(sc.nextLine());
+        Equipo local = new Equipo();
+        local.setEquipo_id(id_local);
+        Equipo visitante = new Equipo();
+        visitante.setEquipo_id(id_visitante);
+        Partido partido = new Partido(fecha_partido, local, visitante);
+        PartidoDAO.insertarPartido(partido, conexion);
+    }
+
+    private static void modificarPartido(Connection conexion) {
+        System.out.println("Introduce el id del partido a modificar: ");
+        int id = Integer.parseInt(sc.nextLine());
+        System.out.println("Introduce la nueva fecha del partido (yyyy-mm-dd): ");
+        String fecha = sc.nextLine();
+        LocalDate fecha_partido = LocalDate.parse(fecha);
+        System.out.println("Introduce el nuevo id del equipo local: ");
+        int id_local = Integer.parseInt(sc.nextLine());
+        System.out.println("Introduce el nuevo id del equipo visitante: ");
+        int id_visitante = Integer.parseInt(sc.nextLine());
+        Equipo local = new Equipo();
+        local.setEquipo_id(id_local);
+        Equipo visitante = new Equipo();
+        visitante.setEquipo_id(id_visitante);
+        Partido partido = new Partido(fecha_partido, local, visitante);
+        partido.setPartido_id(id);
+        PartidoDAO.modificarPartido(partido, conexion);
+    }
+
+    private static void eliminarPartido(Connection conexion) {
+        System.out.println("Introduce el id del partido a eliminar: ");
+        int id = Integer.parseInt(sc.nextLine());
+        PartidoDAO.eliminarPartido(id, conexion);
+    }
+
+    private static void inscribirJugador(Connection conexion) {
+        System.out.println("Introduce el id del jugador a inscribir: ");
+        int id_jugador = Integer.parseInt(sc.nextLine());
+        System.out.println("Introduce el id del equipo en el que inscribir al jugador: ");
+        int id_equipo = Integer.parseInt(sc.nextLine());
+        JugadorDAO.inscribirJugador(id_jugador, id_equipo, conexion);
+    }
+
+    private static void desinscribirJugador(Connection conexion) {
+        System.out.println("Introduce el id del jugador a desinscribir: ");
+        int id_jugador = Integer.parseInt(sc.nextLine());
+        JugadorDAO.desinscribirJugador(id_jugador, conexion);
+    }
+
+    private static void listarEquipoId(Connection conexion) {
+        System.out.println("Introduce el id del equipo a buscar: ");
+        int id = Integer.parseInt(sc.nextLine());
+        EquipoDAO.listarEquipo(id, conexion);
+    }
+
+    private static void listarEquipos(Connection conexion) {
+        EquipoDAO.listarEquipos(conexion);
+    }
+
+    private static void listarJugadorId(Connection conexion) {
+        System.out.println("Introduce el id del jugador a buscar: ");
+        int id = Integer.parseInt(sc.nextLine());
+        JugadorDAO.listarJugador(id, conexion);
+    }
+
+    private static void listarJugadorNombre(Connection conexion) {
+        System.out.println("Introduce el nombre del jugador a buscar: ");
+        String nombre = sc.nextLine();
+        JugadorDAO.listarJugador(nombre, conexion);
+    }
+
+    private static void listarPartidosLocal(Connection conexion) {
+        System.out.println("Introduce el id del equipo local: ");
+        int id_local = Integer.parseInt(sc.nextLine());
+        PartidoDAO.listarPartidosLocales(id_local, conexion);
+    }
+
+    private static void listarPartidosVisitante(Connection conexion) {
+        System.out.println("Introduce el id del equipo visitante: ");
+        int id_visitante = Integer.parseInt(sc.nextLine());
+        PartidoDAO.listarPartidosVisitantes(id_visitante, conexion);
+    }
+
+    private static void listarJugadoresPosicion(Connection conexion) {
+        System.out.println("Introduce la posición de los jugadores a buscar: ");
+        String posicion = sc.nextLine();
+        JugadorDAO.listarJugadoresPosicion(posicion, conexion);
+    }
+
+    private static void listarJugadoresDorsal(Connection conexion) {
+        System.out.println("Introduce el dorsal de los jugadores a buscar: ");
+        int dorsal = Integer.parseInt(sc.nextLine());
+        JugadorDAO.listarJugadoresDorsal(dorsal, conexion);
+    }
+
+    private static void listarPartidosFecha(Connection conexion) {
+        System.out.println("Introduce la fecha de los partidos a buscar (yyyy-mm-dd): ");
+        String fecha = sc.nextLine();
+        LocalDate fecha_partido = LocalDate.parse(fecha);
+        PartidoDAO.listarPartidosFecha(fecha_partido, conexion);
+    }
 }
