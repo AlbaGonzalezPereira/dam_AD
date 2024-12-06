@@ -1,4 +1,6 @@
-# **EJERCICIO 1**
+# Examen 1ª evaluación AD
+
+## **EJERCICIO 1**
 Tenemos un fichero ***personas.txt***, con el nombre y apellidos de diferentes personas. Debes implementar un programa que permita:
 * Leer el fichero y almacenar cada nombre y apellido en un objeto Persona.
 * Creará el siguiente menú:
@@ -14,7 +16,7 @@ la información por pantalla.
 * No se podrán perder los datos de las personas que ya estaban añadidas en el
 fichero original.
 
-# **EJERCICIO 2**
+## **EJERCICIO 2**
 Tenemos un fichero usuarios.xml, que almacena los usuarios y contraseñas de una
 aplicación. Debes crear una aplicación Java que solicite un usuario y contraseña para
 iniciar sesión:
@@ -24,7 +26,7 @@ mensaje “SE HA INICIADO SESIÓN CON ÉXITO”.
 Para realizar el ejercicio, puedes utilizar las siguientes clases:DocumentBuilder,
 DocumentBuilderFactory, Document.
 
-# **EJERCICIO 3**
+## **EJERCICIO 3**
 Utilizando la base de datos de una tienda (bd-tienda.sql), desarrolla una aplicación que
 permita realizar los siguientes apartados. Los datos introducidos podrán ser puestos a
 mano sin la necesidad de solicitar por pantalla la información. Será necesario indicar con
