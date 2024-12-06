@@ -1,5 +1,25 @@
-# xml
-# lectura y escritura de ficheros XML
+REPASO 1ª EVALUACIÓN DE ACCESO A DATOS
+---
+- [1. **Manipulación de ficheros**](#1-manipulación-de-ficheros)
+  - [1.1. Lectura y escritura de ficheros](#11-lectura-y-escritura-de-ficheros)
+  - [1.2. bytes](#12-bytes)
+    - [1.2.1. InputStream](#121-inputstream)
+    - [1.2.2. OutputStream](#122-outputstream)
+    - [1.2.3. Objeto serializable](#123-objeto-serializable)
+    - [1.2.4. Caracteres](#124-caracteres)
+- [2. Filtrar](#2-filtrar)
+- [3. XML con DOM Lectura](#3-xml-con-dom-lectura)
+- [4. Creación de un fichero XML a partir de un documento](#4-creación-de-un-fichero-xml-a-partir-de-un-documento)
+  - [4.1. Resultado](#41-resultado)
+- [5. Conexion a base de datos](#5-conexion-a-base-de-datos)
+- [6. Hacer transacciones](#6-hacer-transacciones)
+- [7. INSERT](#7-insert)
+- [8. SELECT](#8-select)
+- [9. UPDATE](#9-update)
+- [10. DELETE](#10-delete)
+
+# 1. **Manipulación de ficheros**
+## 1.1. Lectura y escritura de ficheros
 ```java
 /**
  * crea el fichero JSON si todavía no existe.
@@ -16,27 +36,62 @@ private void crearFicheroJson() {
     }
 }
 ```
-## bytes
-### inputStream
+## 1.2. bytes
+### 1.2.1. InputStream
 ``FileInputStream (File archivo)`` o ``FileInputStream (String ruta):`` permiten abrir el archivo especificado como parámetro en modo lectura y crear una instancia que permite leer el contenido.
-### OutputStream
+
+### 1.2.2. OutputStream
 * ``FileOutputStream (File archivo)`` o ``FileOutputStream (String ruta)``
 * ``FileOutputStream (File archivo, boolean append)`` o ``FileOutputStream (String ruta, boolean append):``
 
-### Objeto serializable
+### 1.2.3. Objeto serializable
+Sirve para leer y escribir información del programa, como objetos de las clases serializables.
+
 ```java
- // Serializar 'estudiante'
-        FileOutputStream fos = new FileOutputStream("xyz.txt");
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(a);
+    // Serializar 'estudiante'
+    // para crear un ObjectOutputStream necesitamos un FileOutputStream
+    FileOutputStream fos = new FileOutputStream("xyz.txt"); //decimos donde tiene que apuntar ("xyz.txt"). También puede ser un tipo File que apunte a lo que contenga
+    ObjectOutputStream oos = new ObjectOutputStream(fos); //nos permite guardar el objeto
+    oos.writeObject(objetoEstudiante);  //guardamos el objeto 
   
-        // Desserializar 'estudiante'
-        FileInputStream fis = new FileInputStream("xyz.txt");
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        Estudiante estudiante1 = (Estudiante)ois.readObject();
+    // Desserializar 'estudiante'
+    // lee y recupera el objeto con su clase especificada
+    FileInputStream fis = new FileInputStream("xyz.txt");
+    ObjectInputStream ois = new ObjectInputStream(fis);
+    Estudiante estudiante1 = (Estudiante)ois.readObject();//este método devuelve un objeto. Hacemos un casting
+```
+Ejemplo:
+```java
+    //Escribir Objetos
+    Alumno al = new Alumno("Juan", "Balea");
+    System.out.println(al);
+    File fichero = new File("alumnos.txt");
+    try (FileOutputStream out = new FileOutputStream(fichero);
+        ObjectOutputStream ops = new ObjectOutputStream(out);){
+        ops.writeObject(al);
+    } catch (FileNotFoundException ex) {
+        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (IOException ex) {
+        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+    //Leer Objetos
+    File fichero2 = new File("alumnos.txt");
+    if (fichero2.exists()) {
+        try ( FileInputStream is = new FileInputStream(fichero2);  ObjectInputStream ois = new ObjectInputStream(is)) {
+            Alumno alumno = (Alumno) ois.readObject();
+            System.out.println(alumno);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 ```
 
-### caracteres
+### 1.2.4. Caracteres
 * ``BufferedReader``, ``BufferedInputStream``, ``BufferedWriter`` y ``BufferedOutputStream`` 
 
 ```java
@@ -51,25 +106,27 @@ BufferedReader br = new BufferedReader(fr);
 String linea = br.readLine();
 ```
 
-# filtrar
+# 2. Filtrar
 ```java
-class FiltroExtension implements FilenameFilter {
-    private String extension;
+    // Creamos una clse que implemente FilenameFilter, la cual nos permite filtrar
+    class FiltroExtension implements FilenameFilter {
+        private String extension;
 
-    public FiltroExtension(String extension) {
-        this.extension = extension;
-    }
+        // Constructor de la clase pasando la extensión
+        public FiltroExtension(String extension) {
+            this.extension = extension;
+        }
 
-    @Override
-    public boolean accept(File dir, String name) {
-        return name.endsWith(extension);
-    }
+        @Override
+        public boolean accept(File dir, String name) {
+            return name.endsWith(extension);//devuelve los archivos que terminen con esa extensión
+        }
 }
 
 public class Main {
     public static void main(String[] args) {
-        File directorio = new File("C:\\Users\\jgarea\\Documents\\NetBeansProjects\\Ficheros\\src\\ficheros");
-        String[] lista = directorio.list(new FiltroExtension(".txt"));
+        File directorio = new File("C:\\Users\\jgarea\\Documents\\NetBeansProjects\\Ficheros\\src\\ficheros");//ponemos ruta del directorio a filtrar
+        String[] lista = directorio.list(new FiltroExtension(".txt")); //list() muestra los archivos que haya en la carpeta, pero si hay un parámetro que tenga ese filtro, va a coger eso, en este caso ".txt". El filtro es el que se creó arriba
         for (String archivo : lista) {
             System.out.println(archivo);
         }
@@ -78,12 +135,37 @@ public class Main {
 ```
 https://github.com/jgarea/daw_poo/tree/9ff350b2478f33bfd5e8da867c532872f090eb45/Tarea09
 
-# XML con DOM Lectura
+Ejemplo:
+```java
+//Clase Filtro:
+    public class Filtro implements FilenameFilter{
+        private String extension;
+
+        public Filtro(String extension) {
+            this.extension = extension;
+        }
+        
+        @Override
+        public boolean accept(File dir, String name) {
+            return name.endsWith(extension);
+        }
+    }
+
+// Clase Main:
+    File ficheroCarpeta = new File("F:\\02.DAW\\curso 2022-2023\\05.PROG");
+        Filtro filtro = new Filtro(".PNG");
+        String[] ficherosPng = ficheroCarpeta.list(filtro); //ficheroCarpeta.list(new Filtro(".PNG"))
+        for (String fichero : ficherosPng) {
+            System.out.println(fichero);    
+        }
+```
+
+# 3. XML con DOM Lectura
 * Las instrucciones necesarias para leer un archivo XML y crear un objeto Document serían las siguientes:
 ```java
 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance() ; 
 DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-Document doc = dBuilder.parse( new File( "fitler.xml" ));
+Document doc = dBuilder.parse( new File( "fitler.xml" )); //aquí apunta al archivo xml
 ```
 ```java
 import java.io.File;
@@ -104,15 +186,14 @@ public class DomParserDemo {
          Document doc = dBuilder.parse(inputFile);
          
          doc.getDocumentElement().normalize();
-         System.out.println("Root element :" + 
-         doc.getDocumentElement().getNodeName());
+         System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
          
          NodeList nList = doc.getElementsByTagName("alumno");
          
          System.out.println("----------------------------");
          
          for (int temp = 0; temp < nList.getLength(); temp++) {
-            Node nNode = nList.item(temp);
+            Node nNode = nList.item(temp); //para acceder a cada uno de los nodos se usa item(posición)
             System.out.println("\nCurrent Element :" + nNode.getNodeName());
             
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -133,7 +214,7 @@ public class DomParserDemo {
 } 
 ```
 
-# Creación de un fichero XML a partir de un documento
+# 4. Creación de un fichero XML a partir de un documento
 ```java
 public class CrearXml { 
     public static void main(String argv[]) { 
@@ -175,7 +256,7 @@ public class CrearXml {
     } 
 } 
 ```
-## Resultado
+## 4.1. Resultado
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>	
 <root>	
@@ -185,7 +266,7 @@ public class CrearXml {
 ```
 * Hacer 116 y 117
 
-# Conexion a base de datos
+# 5. Conexion a base de datos
 ```java
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -210,7 +291,7 @@ public class Conexion {
 }
 ```
 
-# Hacer transacciones
+# 6. Hacer transacciones
 ```java
 public class Transaccion {
     public static void main(String[] args) {
@@ -232,7 +313,7 @@ public class Transaccion {
     }
 }
 ```
-# INSERT
+# 7. INSERT
 ```java
 public void crearNuevoProveedor(String nombreProveedor, String nif, int telefono, String email){
         try(Connection con=DatabasePostgresql.getInstance();
@@ -253,7 +334,7 @@ public void crearNuevoProveedor(String nombreProveedor, String nif, int telefono
     }
 ```
 
-# SELECT
+# 8. SELECT
 ```java
 public void obtenerTotalPedidosUsuarios(){
         String sql="SELECT usuarios.nombre, COUNT(pedidos.id_pedido) "
@@ -272,7 +353,7 @@ public void obtenerTotalPedidosUsuarios(){
     }
 ```
 
-# UPDATE
+# 9. UPDATE
 ```java
 public void actualizarProveedor(int id, String nombreProveedor, String nif, int telefono, String email){
     try(Connection con=DatabasePostgresql.getInstance();
@@ -295,7 +376,7 @@ public void actualizarProveedor(int id, String nombreProveedor, String nif, int 
 }
 ```
 
-# DELETE
+# 10. DELETE
 ```java
 public void eliminarProveedor(int id){
     try(Connection con=DatabasePostgresql.getInstance();

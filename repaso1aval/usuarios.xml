@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<usuarios>
+	<usuario>
+		<nombre>ibai</nombre>
+		<contraseña>llanos</contraseña>
+	</usuario>
+	<usuario>
+		<nombre>messi</nombre>
+		<contraseña>barcelona</contraseña>
+	</usuario>
+	<usuario>
+		<nombre>shakira</nombre>
+		<contraseña>colombia</contraseña>
+	</usuario>
+</usuarios>
