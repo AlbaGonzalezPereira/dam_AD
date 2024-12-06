@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <usuarios>
 	<usuario>
-		<nombre>ibai</nombre>
+		<nombre id="iba">ibai</nombre>
 		<contraseña>llanos</contraseña>
 	</usuario>
 	<usuario>
-		<nombre>messi</nombre>
+		<nombre id="mes">messi</nombre>
 		<contraseña>barcelona</contraseña>
 	</usuario>
 	<usuario>
-		<nombre>shakira</nombre>
+		<nombre id="sha">shakira</nombre>
 		<contraseña>colombia</contraseña>
 	</usuario>
 </usuarios>

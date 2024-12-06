@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<peliculas>
+    <pelicula id="1">
+        <titulo>El señor de los anillos</titulo>
+        <ano>1999</ano>
+        <precio>19.99</precio>
+    </pelicula>
+    <pelicula id="2">
+        <titulo>Star Wars</titulo>
+        <ano>2005</ano>
+        <precio>12.50</precio>
+    </pelicula>
+    <pelicula id="3">
+        <titulo>Harry Potter</titulo>
+        <ano>2001</ano>
+        <precio>8.25</precio>
+    </pelicula>
+</peliculas>
+

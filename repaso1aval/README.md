@@ -225,16 +225,16 @@ public class CrearXml {
             DOMImplementation implementation = docBuilder.getDOMImplementation();
             Document doc = implementation.createDocument(null, "root", null); 
 
-            //Elemento raíz 
+            // Cogemos el Elemento raíz para poder introducir elementos
             Element rootElement = doc.getDocumentElement(); 
             
-            //Primer elemento 
+            //Primer elemento, lo creamos y lo agregamos con appendChild 
             Element elemento1 = doc.createElement("elemento1"); 
             rootElement.appendChild(elemento1); 
             
             //Se agrega un atributo al nodo elemento y su valor 
             Attr attr = doc.createAttribute("id"); 
-            attr.setValue("valor del atributo"); 
+            attr.setValue("valor del atributo"); //ponemos valor atributo
             elemento1.setAttributeNode(attr); 
             
             Element elemento2 = doc.createElement("elemento2"); 
@@ -243,10 +243,10 @@ public class CrearXml {
             
             //Se escribe el contenido del XML en un archivo 
             TransformerFactory transformerFactory = TransformerFactory.newInstance(); 
-            Transformer transformer = transformerFactory.newTransformer(); 
-            DOMSource source = new DOMSource(doc); 
+            Transformer transformer = transformerFactory.newTransformer(); //transforma el documento DOM en un formato específico (en este caso, XML).
+            DOMSource source = new DOMSource(doc);  // crea una fuente de datos XML 
             StreamResult result = new StreamResult(new File("/ruta/prueba.xml")); 
-            transformer.transform(source, result); 
+            transformer.transform(source, result); //define el destino del contenido transformado
         
         } catch (ParserConfigurationException pce) { 
             pce.printStackTrace(); 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<peliculas>
+    <pelicula id="1">
+        <titulo>El señor de los anillos</titulo>
+        <ano>1999</ano>
+        <precio>19.99</precio>
+    </pelicula>
+</peliculas>
