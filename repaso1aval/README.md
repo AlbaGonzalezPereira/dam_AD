@@ -5,8 +5,10 @@ REPASO 1ª EVALUACIÓN DE ACCESO A DATOS
   - [1.2. bytes](#12-bytes)
     - [1.2.1. InputStream](#121-inputstream)
     - [1.2.2. OutputStream](#122-outputstream)
-    - [1.2.3. Objeto serializable](#123-objeto-serializable)
-    - [1.2.4. Caracteres](#124-caracteres)
+    - [1.2.3. DataInputStream](#123-datainputstream)
+    - [1.2.4. DataOutputStream](#124-dataoutputstream)
+    - [1.2.5. Objeto serializable](#125-objeto-serializable)
+    - [1.2.6. Caracteres](#126-caracteres)
 - [2. Filtrar](#2-filtrar)
 - [3. XML con DOM Lectura](#3-xml-con-dom-lectura)
 - [4. Creación de un fichero XML a partir de un documento](#4-creación-de-un-fichero-xml-a-partir-de-un-documento)
@@ -38,13 +40,76 @@ private void crearFicheroJson() {
 ```
 ## 1.2. bytes
 ### 1.2.1. InputStream
-``FileInputStream (File archivo)`` o ``FileInputStream (String ruta):`` permiten abrir el archivo especificado como parámetro en modo lectura y crear una instancia que permite leer el contenido.
+``FileInputStream (File archivo)`` o ``FileInputStream (String ruta)``: permiten abrir el archivo especificado como parámetro en modo lectura y crear una instancia que permite leer el contenido.
 
 ### 1.2.2. OutputStream
 * ``FileOutputStream (File archivo)`` o ``FileOutputStream (String ruta)``
 * ``FileOutputStream (File archivo, boolean append)`` o ``FileOutputStream (String ruta, boolean append):``
+ 
+### 1.2.3. DataInputStream
+* ``FileInputStream (File archivo)`` o ``FileInputStream (String ruta)``: permiten leer enteros, float, UTF de forma secuencial.
 
-### 1.2.3. Objeto serializable
+### 1.2.4. DataOutputStream
+* ``FileOutputStream (File archivo)`` o ``FileOutputStream (String ruta)``: Permiten escribir de forma secuencial.
+  
+---
+  
+  **Ejemplo:**
+
+  * Escribir en un fichero binario Empleados.dat de manera secuencial, la siguiente información:
+
+  ```
+    Departamento "Contabilidad","Informática","Dirección","Análisis","Finanzas","Hardware"
+    Nª Empleados 3,10,2,5,4,8
+  ```
+  * Mostrar la información del fichero anterior de forma secuencial.
+  
+
+**Solución:**
+```java
+    public static void escritura() throws IOException {
+    
+        File fichero = new File("./Empleados.dat");
+
+        //Creamos los stream de escritura
+        FileOutputStream fileout = new FileOutputStream(fichero);   
+        DataOutputStream dataOS = new DataOutputStream(fileout);
+        
+        // Inicialización de los parámetros a escribir
+        String departamento[] = {"Contabilidad","Informática","Dirección","Análisis","Finanzas","Hardware"};
+        int numempleados[] = {3,10,2,5,4,8};
+            
+        // Escribimos la información
+        for (int i=0;i<numempleados.length; i++){
+            dataOS.writeUTF(departamento[i]); //inserta nombre
+            dataOS.writeInt(numempleados[i]);  //inserta edad
+        }
+
+        // Cerramos el stream
+        dataOS.close(); 
+    }
+```
+  * Mostrar la información del fichero anterior de forma secuencial.
+  ```java
+  public static void lectura() throws IOException {    
+        File fichero = new File("./Empleados.dat");
+        String n;
+        int e;
+
+        try ( FileInputStream filein = new FileInputStream(fichero); DataInputStream dataIS = new DataInputStream(filein);) {
+            while (true) {
+                // Leemos el nombre del departamento
+                n = dataIS.readUTF(); 
+                
+                // Leemos el número de empleados del departamento
+                e = dataIS.readInt();
+                System.out.println("Nombre departamento: " + n + ", Numero de empleados: " + e);        
+            }
+        }catch (EOFException eo) {} 
+    }
+  ```
+
+### 1.2.5. Objeto serializable
 Sirve para leer y escribir información del programa, como objetos de las clases serializables.
 
 ```java
@@ -91,7 +156,7 @@ Ejemplo:
     }
 ```
 
-### 1.2.4. Caracteres
+### 1.2.6. Caracteres
 * ``BufferedReader``, ``BufferedInputStream``, ``BufferedWriter`` y ``BufferedOutputStream`` 
 
 ```java
