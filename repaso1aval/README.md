@@ -2,13 +2,16 @@ REPASO 1ª EVALUACIÓN DE ACCESO A DATOS
 ---
 - [1. **Manipulación de ficheros**](#1-manipulación-de-ficheros)
   - [1.1. Lectura y escritura de ficheros](#11-lectura-y-escritura-de-ficheros)
-  - [1.2. bytes](#12-bytes)
-    - [1.2.1. InputStream](#121-inputstream)
-    - [1.2.2. OutputStream](#122-outputstream)
-    - [1.2.3. DataInputStream](#123-datainputstream)
-    - [1.2.4. DataOutputStream](#124-dataoutputstream)
-    - [1.2.5. Objeto serializable](#125-objeto-serializable)
-    - [1.2.6. Caracteres](#126-caracteres)
+  - [1.2. API `java.io`](#12-api-javaio)
+    - [1.2.1. Elegir la clase:](#121-elegir-la-clase)
+    - [1.2.2. RandomAccessFile](#122-randomaccessfile)
+  - [1.3. bytes](#13-bytes)
+    - [1.3.1. InputStream](#131-inputstream)
+    - [1.3.2. OutputStream](#132-outputstream)
+    - [1.3.3. DataInputStream](#133-datainputstream)
+    - [1.3.4. DataOutputStream](#134-dataoutputstream)
+    - [1.3.5. Objeto serializable](#135-objeto-serializable)
+    - [1.3.6. Caracteres](#136-caracteres)
 - [2. Filtrar](#2-filtrar)
 - [3. XML con DOM Lectura](#3-xml-con-dom-lectura)
 - [4. Creación de un fichero XML a partir de un documento](#4-creación-de-un-fichero-xml-a-partir-de-un-documento)
@@ -38,18 +41,128 @@ private void crearFicheroJson() {
     }
 }
 ```
-## 1.2. bytes
-### 1.2.1. InputStream
+## 1.2. API `java.io`
+* `File`: representa un archivo/directorio y permite realizar operaciones como verificar si existe un archivo o directorio, obtener propiedades eliminarlo, crearlo.
+* `InputStream` y `OutputStream` clases abstratas para leer y escribir byte a byte,se almacenan en binario. Se utilizan para almacenar un archivo como un ejecutable o una imagen.
+    * Clases concretas:
+        * ``ByteArrayInputStream``: Crea un InputStream a partir de un array de byte (byte[]) pasado como parámetro
+        a su construtor. Cuando leemos de este Stream leemos del array de datos.
+        * ``ByteArrayOutputStream``: Crea un OutputStream de manera que los bytes que escribimos se almacenan en un
+        array de bytes (byte[]). La clase proporciona el método **byte[] toByteArray();** que nos permite recuperar los datos escritos.
+        
+        * `FileInputStream`: Crea un `InputStream` a partir de un objecto File que se recibe o se crea en el construtor de la clase y que referencia a un ficheiro en disco. Cuando leemos de este Stream leemos datos del ficheiro.
+        * `FileOutputStream`: Crea un `OutputStream` de manera que los bytes que escribimos se almacenan en un fichero referenciado por el objeto File que se recibe o se crea en el construtor de la clase.
+        * `BufferedInputStream` , `BufferedOutputStream`
+        ---
+        * ``DataInputStream``: Permite la lectura de datos primitivos del Stream como char, boolean, byte, float,
+        double, o int.
+        * ``DataOutputStream``: Permite volcar datos primitivos como char, boolean, byte, float, double, o int a un flujo de salida.
+        * ``ObjectInputStream``: Permite leer objetos de un flujo de bytes escritos con ``ObjectOutputStream``.
+        * ``ObjectOutputStream``: Permite volcar objetos en el Stream. Cuando se crea el stream siempre se envía una cabecera mediante el método ``void writeStreamHeader()``, lo que debemos tener en conta si queremos añadir objetos al final de un fichero ya existente. En este caso, una solución es emplear una clase heredada en la que este método no haga nada.
+
+* `Reader` y `Writer`: Clases abstractas para leer y escribir caracteres en vez de bytes, se utilizan para almacenar archivos de texto.
+    * Clases concretas:
+        * `FileReader` , `FileWriter`
+
+        * `BufferedReader` Esta clase proporciona como principal aportación el método ``String readLine()`` que lee
+        del flujo de texto una línea.
+
+        * `BufferedWriter`  Esta clase realmente no proporciona nuevas funcionalidades importantes sobre las
+        ofrecidas por un Reader simple, pero mejora su velocidad haciendo uso de un buffer de caracteres. 
+
+        * `PrintWriter` Esta clase proporciona métodos que nos permiten dar formato a la conversión en texto de la
+        información que queremos escribir en el Stream, destacando las distintas versiones sobrecargadas de los
+        métodos **print**, **println** e **printf**
+
+### 1.2.1. Elegir la clase:
+* Primero tenemos que comprobar si queremos escribir o leer caracteres o en binario.
+    * Para leer y escribir en binario utilizamos las clases heredadas de `InputStream` y `OutputStream` ejemplos más arriba. Si lees o escribes objetos tienen que ser seriealizables implementando la interfaz
+    * Para leer y escribir caracteres usamos las clases que heredan de `Reader` y `Writer`.
+
+**Ejercicio**
+* Crea un datos.txt con estos datos:
+```
+12345D,juan
+64421G,alba
+76532E,pepe  
+```
+* Lee cada una de las lineas con stream y visualiza por pantalla.
+* Lee cada una de las lineas y escríbelas en otro fichero datos2.txt.
+
+<details><summary>Solucion</summary>
+<p>
+
+```java
+try ( BufferedReader read = new BufferedReader(new FileReader("texto.txt"));PrintWriter writer= new PrintWriter("datos2.txt");) {
+            String linea;
+            while ((linea = read.readLine()) != null) {
+                System.out.println(linea);
+                writer.print(linea+"\n");
+            } 
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PruebaLecturaFicherosStreams.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PruebaLecturaFicherosStreams.class.getName()).log(Level.SEVERE, null, ex);
+        }
+```
+
+</p>
+</details>
+
+### 1.2.2. RandomAccessFile
+La clase ``RandomAccessFile`` nos permite crear, almacenar y leer información en archivos sobre un soporte
+almacenamiento de acceso aleatorio.
+
+**En Java o ficheiro se “abre” cando instanciamos o obxecto RandomAccessFile que o referencia.**
+
+El concepto más importante de los RandomAccessFile es el “puntero del fichero” o “posición”. Los bytes
+almacenados en un fichero están identificados por una dirección, siendo 0 la dirección del primer byte, 1 la del segundo..., etc. 
+
+La clase RandomAccessFile dispone de dos métodos para gestionar el posicionamiento del puntero del fichero:
+* ``long getFilePointer();`` que nos devuelve el número del byte al que está apuntando actualmente el puntero del fichero, y, por lo tanto, el byte que se va a leer o escribir en la siguiente operación.
+* ``void seek(long pos);`` que cambia la posición del puntero del fichero al byte identificado por el número indicado.
+
+``String	readUTF()``
+
+Reads in a string from this file.
+
+``writeUTF(String str)``
+
+Writes a string to the file using modified UTF-8 encoding in a machine-independent manner.
+
+```java
+private Usuario readUser(RandomAccessFile ras) throws EOFException, IOException
+```
+
+<details><summary>Solución</summary>
+<p>
+
+```java
+String dni,nome;
+int edade;
+dni=ras.readUTF();
+if (dni==null) throw new EOFException("End of file");
+if (dni.equals("*")) return null;   // Rexistro borrado
+nome=ras.readUTF();
+edade=ras.readInt();
+return new Usuario(dni,nome,edade);
+```
+
+</p>
+</details>
+
+## 1.3. bytes
+### 1.3.1. InputStream
 ``FileInputStream (File archivo)`` o ``FileInputStream (String ruta)``: permiten abrir el archivo especificado como parámetro en modo lectura y crear una instancia que permite leer el contenido.
 
-### 1.2.2. OutputStream
+### 1.3.2. OutputStream
 * ``FileOutputStream (File archivo)`` o ``FileOutputStream (String ruta)``
 * ``FileOutputStream (File archivo, boolean append)`` o ``FileOutputStream (String ruta, boolean append):``
  
-### 1.2.3. DataInputStream
+### 1.3.3. DataInputStream
 * ``FileInputStream (File archivo)`` o ``FileInputStream (String ruta)``: permiten leer enteros, float, UTF de forma secuencial.
 
-### 1.2.4. DataOutputStream
+### 1.3.4. DataOutputStream
 * ``FileOutputStream (File archivo)`` o ``FileOutputStream (String ruta)``: Permiten escribir de forma secuencial.
   
 ---
@@ -109,7 +222,7 @@ private void crearFicheroJson() {
     }
   ```
 
-### 1.2.5. Objeto serializable
+### 1.3.5. Objeto serializable
 Sirve para leer y escribir información del programa, como objetos de las clases serializables.
 
 ```java
@@ -156,7 +269,7 @@ Ejemplo:
     }
 ```
 
-### 1.2.6. Caracteres
+### 1.3.6. Caracteres
 * ``BufferedReader``, ``BufferedInputStream``, ``BufferedWriter`` y ``BufferedOutputStream`` 
 
 ```java
@@ -198,7 +311,6 @@ public class Main {
     }
 }
 ```
-https://github.com/jgarea/daw_poo/tree/9ff350b2478f33bfd5e8da867c532872f090eb45/Tarea09
 
 Ejemplo:
 ```java
