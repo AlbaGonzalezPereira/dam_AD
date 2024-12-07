@@ -5,23 +5,23 @@ REPASO 1ª EVALUACIÓN DE ACCESO A DATOS
   - [1.2. API `java.io`](#12-api-javaio)
     - [1.2.1. Elegir la clase:](#121-elegir-la-clase)
     - [1.2.2. RandomAccessFile](#122-randomaccessfile)
-  - [1.3. bytes](#13-bytes)
+  - [1.3. **bytes**](#13-bytes)
     - [1.3.1. InputStream](#131-inputstream)
     - [1.3.2. OutputStream](#132-outputstream)
     - [1.3.3. DataInputStream](#133-datainputstream)
     - [1.3.4. DataOutputStream](#134-dataoutputstream)
     - [1.3.5. Objeto serializable](#135-objeto-serializable)
     - [1.3.6. Caracteres](#136-caracteres)
-- [2. Filtrar](#2-filtrar)
-- [3. XML con DOM Lectura](#3-xml-con-dom-lectura)
-- [4. Creación de un fichero XML a partir de un documento](#4-creación-de-un-fichero-xml-a-partir-de-un-documento)
+- [2. **Filtrar**](#2-filtrar)
+- [3. **XML con DOM Lectura**](#3-xml-con-dom-lectura)
+- [4. **Creación de un fichero XML a partir de un documento**](#4-creación-de-un-fichero-xml-a-partir-de-un-documento)
   - [4.1. Resultado](#41-resultado)
-- [5. Conexion a base de datos](#5-conexion-a-base-de-datos)
-- [6. Hacer transacciones](#6-hacer-transacciones)
-- [7. INSERT](#7-insert)
-- [8. SELECT](#8-select)
-- [9. UPDATE](#9-update)
-- [10. DELETE](#10-delete)
+- [5. **Conexión a base de datos**](#5-conexión-a-base-de-datos)
+- [6. **Hacer transacciones**](#6-hacer-transacciones)
+- [7. **INSERT**](#7-insert)
+- [8. **SELECT**](#8-select)
+- [9. **UPDATE**](#9-update)
+- [10. **DELETE**](#10-delete)
 
 # 1. **Manipulación de ficheros**
 ## 1.1. Lectura y escritura de ficheros
@@ -151,7 +151,7 @@ return new Usuario(dni,nome,edade);
 </p>
 </details>
 
-## 1.3. bytes
+## 1.3. **bytes**
 ### 1.3.1. InputStream
 ``FileInputStream (File archivo)`` o ``FileInputStream (String ruta)``: permiten abrir el archivo especificado como parámetro en modo lectura y crear una instancia que permite leer el contenido.
 
@@ -284,7 +284,7 @@ BufferedReader br = new BufferedReader(fr);
 String linea = br.readLine();
 ```
 
-# 2. Filtrar
+# 2. **Filtrar**
 ```java
     // Creamos una clse que implemente FilenameFilter, la cual nos permite filtrar
     class FiltroExtension implements FilenameFilter {
@@ -337,7 +337,7 @@ Ejemplo:
         }
 ```
 
-# 3. XML con DOM Lectura
+# 3. **XML con DOM Lectura**
 * Las instrucciones necesarias para leer un archivo XML y crear un objeto Document serían las siguientes:
 ```java
 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance() ; 
@@ -391,7 +391,7 @@ public class DomParserDemo {
 } 
 ```
 
-# 4. Creación de un fichero XML a partir de un documento
+# 4. **Creación de un fichero XML a partir de un documento**
 ```java
 public class CrearXml { 
     public static void main(String argv[]) { 
@@ -443,7 +443,7 @@ public class CrearXml {
 ```
 * Hacer 116 y 117
 
-# 5. Conexion a base de datos
+# 5. **Conexión a base de datos**
 ```java
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -468,50 +468,59 @@ public class Conexion {
 }
 ```
 
-# 6. Hacer transacciones
+# 6. **Hacer transacciones**
 ```java
 public class Transaccion {
     public static void main(String[] args) {
         Connection conexion = Conexion.getConexion();
         try {
-            conexion.setAutoCommit(false);
+            conexion.setAutoCommit(false); //Desactivamos autoCommit para que no haga nada hasta que se haga un commit
             Statement sentencia = conexion.createStatement();
             sentencia.executeUpdate("INSERT INTO alumnos (nombre, apellidos) VALUES ('Juan', 'García')");
             sentencia.executeUpdate("INSERT INTO alumnos (nombre, apellidos) VALUES ('Ana', 'Martínez')");
             conexion.commit();
-        } catch (SQLException ex) {
-            try {
-                conexion.rollback();
+        } catch (SQLException ex) { //en caso de error
+            try { 
+                conexion.rollback(); //no hace ninguna de las sentencias. Revertir cambios
             } catch (SQLException ex1) {
                 System.out.println("Error al hacer rollback " + ex1.getMessage());
             }
             System.out.println("Error al hacer la transacción " + ex.getMessage());
+        } finally {
+            try {
+                if (conexion != null) {
+                    conexion.setAutoCommit(true); // Restaurar auto-commit
+                }
+            } catch (SQLException ex2) {
+                System.out.println("Error al restaurar auto-commit " + ex2.getMessage());
+            }
         }
     }
 }
 ```
-# 7. INSERT
+# 7. **INSERT**
 ```java
 public void crearNuevoProveedor(String nombreProveedor, String nif, int telefono, String email){
-        try(Connection con=DatabasePostgresql.getInstance();
-                PreparedStatement stmt = con.prepareStatement("INSERT INTO proveedores(nombre_proveedor,contacto,nif) VALUES (?,ROW(?,?,?),?)");){
-            stmt.setString(1, nombreProveedor);
-            stmt.setString(2, null);
-            stmt.setInt(3, telefono);
-            stmt.setString(4, email);
-            stmt.setString(5, nif);
-            int consulta=stmt.executeUpdate();
-            if(consulta>0)
-                System.out.println("Proveedor creado.");
-            else
-                System.out.println("Proveedor no ha podido crearse.");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+    String sql = "INSERT INTO proveedores(nombre_proveedor,contacto,nif) VALUES (?,ROW(?,?,?),?)";
+    try(Connection con=DatabasePostgresql.getInstance();
+        PreparedStatement stmt = con.prepareStatement(sql);){
+        stmt.setString(1, nombreProveedor);
+        stmt.setString(2, null);
+        stmt.setInt(3, telefono);
+        stmt.setString(4, email);
+        stmt.setString(5, nif);
+        int consulta=stmt.executeUpdate();
+        if(consulta>0)
+            System.out.println("Proveedor creado.");
+        else
+            System.out.println("Proveedor no ha podido crearse.");
+    } catch (SQLException ex) {
+        ex.printStackTrace();
     }
+}
 ```
 
-# 8. SELECT
+# 8. **SELECT**
 ```java
 public void obtenerTotalPedidosUsuarios(){
         String sql="SELECT usuarios.nombre, COUNT(pedidos.id_pedido) "
@@ -530,7 +539,7 @@ public void obtenerTotalPedidosUsuarios(){
     }
 ```
 
-# 9. UPDATE
+# 9. **UPDATE**
 ```java
 public void actualizarProveedor(int id, String nombreProveedor, String nif, int telefono, String email){
     try(Connection con=DatabasePostgresql.getInstance();
@@ -553,7 +562,7 @@ public void actualizarProveedor(int id, String nombreProveedor, String nif, int 
 }
 ```
 
-# 10. DELETE
+# 10. **DELETE**
 ```java
 public void eliminarProveedor(int id){
     try(Connection con=DatabasePostgresql.getInstance();
