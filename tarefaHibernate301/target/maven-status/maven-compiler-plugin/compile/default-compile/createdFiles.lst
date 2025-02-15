@@ -1,0 +1,15 @@
+entidades\Paciente.class
+HibernateUtil.class
+repositorios\RepositorioHospital.class
+repositorios\RepositorioTratamiento.class
+entidades\Doctor.class
+repositorios\Repositorio.class
+repositorios\RepositorioRecibe.class
+repositorios\RepositorioPaciente.class
+repositorios\RepositorioDoctor.class
+Principal.class
+entidades\Hospital.class
+entidades\Tratamiento.class
+entidades\Cita.class
+entidades\Recibe.class
+repositorios\RepositorioCita.class
