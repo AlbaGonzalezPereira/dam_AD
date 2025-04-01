@@ -1,0 +1,10 @@
+[{
+  "_id": {
+    "$oid": "67e93f789a4ce101624cd61b"
+  },
+  "usuario_id": "albagp@gmail.com",
+  "videojuegos_id": [
+    4,
+    11
+  ]
+}]

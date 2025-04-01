@@ -1,0 +1,44 @@
+[{
+  "_id": {
+    "$oid": "67e98521d42304425e4295fc"
+  },
+  "usuario_id": "alba@gmail.com",
+  "videojuegos": [
+    {
+      "id": 14,
+      "cantidad": 2
+    },
+    {
+      "id": 13,
+      "cantidad": 1
+    }
+  ],
+  "total": 169.97,
+  "fecha": {
+    "$date": "2025-03-30T17:53:37.037Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67e9893c715b031684da44af"
+  },
+  "usuario_id": "lorenzo@gmail.com",
+  "videojuegos": [
+    {
+      "id": 12,
+      "cantidad": 1
+    },
+    {
+      "id": 13,
+      "cantidad": 2
+    },
+    {
+      "id": 14,
+      "cantidad": 1
+    }
+  ],
+  "total": 199.95999999999998,
+  "fecha": {
+    "$date": "2025-03-30T18:11:08.888Z"
+  }
+}]

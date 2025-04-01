@@ -1,0 +1,28 @@
+[{
+  "_id": "cliente1@example.com",
+  "nombre": "Nombre Cliente 1",
+  "email": "cliente1@example.com",
+  "edad": 17,
+  "direccion": "Dirección Cliente 1"
+},
+{
+  "_id": "alba@gmail.com",
+  "nombre": "Alba Gonz�lez",
+  "email": "alba@gmail.com",
+  "edad": 47,
+  "direccion": "Pontevedra 55"
+},
+{
+  "_id": "albagp@gmail.com",
+  "nombre": "alba gonzalez",
+  "email": "albagp@gmail.com",
+  "edad": 9,
+  "direccion": "Pontevedra"
+},
+{
+  "_id": "lorenzo@gmail.com",
+  "nombre": "lorenzo",
+  "email": "lorenzo@gmail.com",
+  "edad": 57,
+  "direccion": "Cangas"
+}]

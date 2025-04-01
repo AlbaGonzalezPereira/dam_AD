@@ -1,0 +1,286 @@
+[{
+  "_id": {
+    "$oid": "67e937d741d0bea1fd6c9785"
+  },
+  "id": 1,
+  "titulo": "The Legend of Zelda: Breath of the Wild",
+  "descripcion": "Aventura épica en un mundo abierto donde Link debe explorar el vasto reino de Hyrule, resolver acertijos, mejorar su equipo y enfrentarse a Ganon para salvar a la princesa Zelda.",
+  "precio": 59.99,
+  "disponibilidad": 5,
+  "genero": "Aventura",
+  "desarrollador": "Nintendo",
+  "edad_minima_recomendada": 12,
+  "plataforma": "Nintendo Switch",
+  "especificaciones": {
+    "mundo_abierto": "Sí",
+    "duracion_promedio": "50 horas",
+    "cartucho": "Sí",
+    "modo_portatil": "Compatible"
+  }
+},
+{
+  "_id": {
+    "$oid": "67e937d741d0bea1fd6c9786"
+  },
+  "id": 2,
+  "titulo": "God of War Ragnarok",
+  "descripcion": "Kratos y Atreus viajan por los Nueve Reinos en una aventura llena de acción, mitología y drama. Se enfrentan a dioses nórdicos como Thor y Odín en su intento por desafiar el destino.",
+  "precio": 69.99,
+  "disponibilidad": 15,
+  "genero": "Acción",
+  "desarrollador": "Santa Monica Studio",
+  "edad_minima_recomendada": 18,
+  "plataforma": "PlayStation 5",
+  "especificaciones": {
+    "modo_historia": "Sí",
+    "resolucion_maxima": "4K",
+    "fps": 60,
+    "audio_3d": "Compatible"
+  }
+},
+{
+  "_id": {
+    "$oid": "67e937d741d0bea1fd6c9787"
+  },
+  "id": 3,
+  "titulo": "Cyberpunk 2077",
+  "descripcion": "Un RPG de mundo abierto ambientado en un futuro distópico donde los jugadores encarnan a V, un mercenario en busca de la inmortalidad en la peligrosa ciudad de Night City.",
+  "precio": 49.99,
+  "disponibilidad": 30,
+  "genero": "RPG",
+  "desarrollador": "CD Projekt Red",
+  "edad_minima_recomendada": 18,
+  "plataforma": "PC",
+  "especificaciones": {
+    "graficos": "Ultra",
+    "ray_tracing": "Disponible",
+    "cpu_recomendada": "Intel i7-12700K",
+    "gpu_recomendada": "RTX 3080"
+  }
+},
+{
+  "_id": {
+    "$oid": "67e937d741d0bea1fd6c9788"
+  },
+  "id": 4,
+  "titulo": "EA Sports FC 25",
+  "descripcion": "El simulador de fútbol más realista hasta la fecha, con mejoras en la inteligencia artificial, animaciones más fluidas y nuevos modos de juego para desafiar a los mejores jugadores del mundo.",
+  "precio": 69.99,
+  "disponibilidad": 100,
+  "genero": "Deportes",
+  "desarrollador": "EA Sports",
+  "edad_minima_recomendada": 3,
+  "plataforma": "PlayStation 5",
+  "especificaciones": {
+    "modo_carrera": "Sí",
+    "modo_online": "Sí",
+    "fps": 60
+  }
+},
+{
+  "_id": {
+    "$oid": "67e937d741d0bea1fd6c9789"
+  },
+  "id": 5,
+  "titulo": "Hollow Knight",
+  "descripcion": "Explora el misterioso reino de Hallownest en este desafiante metroidvania. Con su arte dibujado a mano y su mecánica precisa de combate, es un juego que pondrá a prueba tu habilidad.",
+  "precio": 14.99,
+  "disponibilidad": 11,
+  "genero": "Plataformas",
+  "desarrollador": "Team Cherry",
+  "edad_minima_recomendada": 7,
+  "plataforma": "Nintendo Switch",
+  "especificaciones": {
+    "modo_portatil": "Compatible",
+    "duracion_promedio": "40 horas"
+  }
+},
+{
+  "_id": {
+    "$oid": "67e937d741d0bea1fd6c978a"
+  },
+  "id": 6,
+  "titulo": "Spider-Man 2",
+  "descripcion": "Acompaña a Peter Parker y Miles Morales en su lucha contra Venom en este trepidante juego de mundo abierto con gráficos mejorados y una historia cautivadora.",
+  "precio": 79.99,
+  "disponibilidad": 20,
+  "genero": "Acción",
+  "desarrollador": "Insomniac Games",
+  "edad_minima_recomendada": 16,
+  "plataforma": "PlayStation 5",
+  "especificaciones": {
+    "graficos": "Ultra",
+    "fps": 60,
+    "mundo_abierto": "Sí"
+  }
+},
+{
+  "_id": {
+    "$oid": "67e937d741d0bea1fd6c978b"
+  },
+  "id": 7,
+  "titulo": "Red Dead Redemption 2",
+  "descripcion": "Una épica historia de forajidos en el salvaje oeste, donde Arthur Morgan debe elegir entre la lealtad a su banda o su propia moralidad mientras enfrenta un mundo cambiante.",
+  "precio": 39.99,
+  "disponibilidad": 18,
+  "genero": "Aventura",
+  "desarrollador": "Rockstar Games",
+  "edad_minima_recomendada": 18,
+  "plataforma": "PC",
+  "especificaciones": {
+    "graficos": "Ultra",
+    "mundo_abierto": "Sí",
+    "ray_tracing": "No"
+  }
+},
+{
+  "_id": {
+    "$oid": "67e937d741d0bea1fd6c978c"
+  },
+  "id": 8,
+  "titulo": "Elden Ring",
+  "descripcion": "Un desafiante RPG de acción con un vasto mundo abierto diseñado por Hidetaka Miyazaki y George R.R. Martin. Explora reinos oscuros y derrota temibles enemigos en este aclamado juego de FromSoftware.",
+  "precio": 59.99,
+  "disponibilidad": 10,
+  "genero": "RPG",
+  "desarrollador": "FromSoftware",
+  "edad_minima_recomendada": 16,
+  "plataforma": "PC",
+  "especificaciones": {
+    "modo_online": "Sí",
+    "ray_tracing": "Disponible",
+    "fps": 60
+  }
+},
+{
+  "_id": {
+    "$oid": "67e937d741d0bea1fd6c978d"
+  },
+  "id": 9,
+  "titulo": "Minecraft",
+  "descripcion": "Explora, construye y sobrevive en un mundo generado proceduralmente. Usa tu creatividad para crear estructuras asombrosas o aventúrate en el modo supervivencia.",
+  "precio": 29.99,
+  "disponibilidad": 11,
+  "genero": "Sandbox",
+  "desarrollador": "Mojang Studios",
+  "edad_minima_recomendada": 7,
+  "plataforma": "PC",
+  "especificaciones": {
+    "modo_creativo": "Sí",
+    "modo_supervivencia": "Sí",
+    "multijugador": "Online y local"
+  }
+},
+{
+  "_id": {
+    "$oid": "67e937d741d0bea1fd6c978e"
+  },
+  "id": 10,
+  "titulo": "Resident Evil 4 Remake",
+  "descripcion": "Revive la icónica historia de Leon S. Kennedy en este remake con gráficos mejorados y mecánicas renovadas. Sobrevive en un pueblo infectado por un peligroso virus.",
+  "precio": 59.99,
+  "disponibilidad": 4,
+  "genero": "Terror",
+  "desarrollador": "Capcom",
+  "edad_minima_recomendada": 18,
+  "plataforma": "PlayStation 5",
+  "especificaciones": {
+    "modo_historia": "Sí",
+    "graficos": "4K",
+    "fps": 60
+  }
+},
+{
+  "_id": {
+    "$oid": "67e937d741d0bea1fd6c978f"
+  },
+  "id": 11,
+  "titulo": "Super Mario Odyssey",
+  "descripcion": "Embárcate en una aventura junto a Mario y su compañero Cappy para rescatar a la princesa Peach y explorar vastos mundos llenos de secretos y desafíos.",
+  "precio": 49.99,
+  "disponibilidad": 7,
+  "genero": "Plataformas",
+  "desarrollador": "Nintendo",
+  "edad_minima_recomendada": 3,
+  "plataforma": "Nintendo Switch",
+  "especificaciones": {
+    "modo_portatil": "Compatible",
+    "multijugador": "Local"
+  }
+},
+{
+  "_id": {
+    "$oid": "67e937d741d0bea1fd6c9790"
+  },
+  "id": 12,
+  "titulo": "Horizon Forbidden West",
+  "descripcion": "Acompaña a Aloy en su nueva aventura por tierras inexploradas en busca de respuestas sobre el destino de la humanidad, enfrentándose a máquinas letales.",
+  "precio": 69.99,
+  "disponibilidad": 2,
+  "genero": "Aventura",
+  "desarrollador": "Guerrilla Games",
+  "edad_minima_recomendada": 16,
+  "plataforma": "PlayStation 5",
+  "especificaciones": {
+    "modo_historia": "Sí",
+    "graficos": "4K",
+    "mundo_abierto": "Sí"
+  }
+},
+{
+  "_id": {
+    "$oid": "67e937d741d0bea1fd6c9791"
+  },
+  "id": 13,
+  "titulo": "Grand Theft Auto V",
+  "descripcion": "Conviértete en un criminal de Los Santos en este juego de mundo abierto, con una historia envolvente y un modo multijugador expansivo con constantes actualizaciones.",
+  "precio": 29.99,
+  "disponibilidad": 5,
+  "genero": "Acción",
+  "desarrollador": "Rockstar Games",
+  "edad_minima_recomendada": 18,
+  "plataforma": "PC",
+  "especificaciones": {
+    "modo_historia": "Sí",
+    "modo_online": "Sí",
+    "fps": 60
+  }
+},
+{
+  "_id": {
+    "$oid": "67e937d741d0bea1fd6c9792"
+  },
+  "id": 14,
+  "titulo": "Starfield",
+  "descripcion": "Explora el universo en este RPG de ciencia ficción de Bethesda. Viaja entre planetas, construye tu nave y descubre los secretos de la galaxia en una aventura épica.",
+  "precio": 69.99,
+  "disponibilidad": 25,
+  "genero": "RPG",
+  "desarrollador": "Bethesda Game Studios",
+  "edad_minima_recomendada": 18,
+  "plataforma": "Xbox Series X",
+  "especificaciones": {
+    "mundo_abierto": "Sí",
+    "naves_personalizables": "Sí",
+    "fps": 60
+  }
+},
+{
+  "_id": {
+    "$oid": "67e937d741d0bea1fd6c9793"
+  },
+  "id": 15,
+  "titulo": "Metroid Dread",
+  "descripcion": "Samus Aran regresa en esta nueva entrega de la saga Metroid, enfrentándose a peligrosos enemigos y explorando laberintos llenos de secretos en un mundo alienígena.",
+  "precio": 49.99,
+  "disponibilidad": 20,
+  "genero": "Acción",
+  "desarrollador": "MercurySteam",
+  "edad_minima_recomendada": 12,
+  "plataforma": "Nintendo Switch",
+  "especificaciones": {
+    "modo_portatil": "Compatible",
+    "dificultad": "Alta",
+    "fps": 60
+  }
+}]
