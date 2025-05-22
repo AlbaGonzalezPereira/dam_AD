@@ -125,3 +125,7 @@ private static void crearBaseDatosyColeccion() {
     }
 }
 ```
+
+En resumen, estos métodos son útiles porque **separan y organizan tareas** específicas de cada base de datos. Cada método se encarga de una **función específica** (consultar en BaseX o crear colecciones en MongoDB), lo que hace el código más claro y organizado: **Uno se conecta a BaseX**, ejecuta una consulta y muestra los resultados, mientras que **el otro se encarga de crear y obtener colecciones** en MongoDB si aún no existen. 
+
+Esto mejora la **modularidad**, el **manejo de errores** y la **gestión de recursos**, haciendo el código más claro y fácil de mantener.

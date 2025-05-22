@@ -1,0 +1,631 @@
+{
+	"info": {
+		"_postman_id": "75967fa8-6e59-4ec6-b4b0-7ac436106a1d",
+		"name": "AccesoDatos1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44256919",
+		"_collection_link": "https://warped-meadow-6033686.postman.co/workspace/f5662115-4756-4fb7-86e8-e397d16bb3d3/collection/44256919-75967fa8-6e59-4ec6-b4b0-7ac436106a1d?action=share&source=collection_link&creator=44256919"
+	},
+	"item": [
+		{
+			"name": "saludo",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8501/saludo/alba",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"saludo",
+						"alba"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registrarUsuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Alba González\",\r\n    \"correo_electronico\": \"alba@gmail.com\",\r\n    \"direccion\": \"Pontevedra\",\r\n    \"contrasena\": \"alba1234.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8502/usuarios/registrar",
+					"host": [
+						"localhost"
+					],
+					"port": "8502",
+					"path": [
+						"usuarios",
+						"registrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actualizarUsuario",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario_id\": 11,\r\n    \"nombre\": \"Alba González Pereira\",\r\n    \"correo_electronico\": \"alba.glez.pereira@gmail.com\",\r\n    \"direccion\": \"Monteporreiro, Pontevedra\",\r\n    \"contrasena\": \"alba1234.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8502/usuarios/registrar",
+					"host": [
+						"localhost"
+					],
+					"port": "8502",
+					"path": [
+						"usuarios",
+						"registrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eliminarUsuario",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"nombre\": \"Alba González Pereira\",\r\n    \"contrasena\": \"alba1234.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8502/usuarios/",
+					"host": [
+						"localhost"
+					],
+					"port": "8502",
+					"path": [
+						"usuarios",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "validarUsuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Ana Martínez\",\r\n    \"contrasena\": \"abcxyz\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8502/usuarios/validar",
+					"host": [
+						"localhost"
+					],
+					"port": "8502",
+					"path": [
+						"usuarios",
+						"validar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtenerNombreUsuario",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8502/usuarios/info/id/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8502",
+					"path": [
+						"usuarios",
+						"info",
+						"id",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtenerIdUsuario",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario_id\": 13,\r\n    \"nombre\": \"Alba González\",\r\n    \"correo_electronico\": \"alba@gmail.com\",\r\n    \"direccion\": \"Pontevedra\",\r\n    \"contrasena\": \"alba1234.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8502/usuarios/info/nombre/Ana Martínez",
+					"host": [
+						"localhost"
+					],
+					"port": "8502",
+					"path": [
+						"usuarios",
+						"info",
+						"nombre",
+						"Ana Martínez"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "checkIfExist",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario_id\": 13,\r\n    \"nombre\": \"Alba González\",\r\n    \"correo_electronico\": \"alba@gmail.com\",\r\n    \"direccion\": \"Pontevedra\",\r\n    \"contrasena\": \"alba1234.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8502/usuarios/checkIfExist/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8502",
+					"path": [
+						"usuarios",
+						"checkIfExist",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crearHabitacion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"María López\",\r\n    \"contrasena\": \"secreto456\",\r\n    \"habitacion\": {\r\n        \"numero_habitacion\": 208,\r\n        \"tipo\": \"doble\",\r\n        \"precio\": 120.0,\r\n        \"hotel\": {\r\n            \"hotel_id\": 3\r\n        }\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8501/reservas/habitacion",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"reservas",
+						"habitacion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actualizarHabitacion",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"María López\",\r\n    \"contrasena\": \"secreto456\",\r\n    \"habitacion\": {\r\n        \"habitacion_id\": 19,\r\n        \"hotel\": {\r\n            \"hotel_id\": 2\r\n        },\r\n        \"disponible\": 1\r\n    }\r\n  \r\n  \r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8501/reservas/habitacion",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"reservas",
+						"habitacion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eliminarHabitacion",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"María López\",\r\n    \"contrasena\": \"secreto456\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8501/reservas/habitacion/19",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"reservas",
+						"habitacion",
+						"19"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crearHotel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Carlos Rodriguez\",\r\n    \"contrasena\": \"password789\",\r\n    \"hotel\": {\r\n        \"nombre\": \"Albatros IV\",\r\n        \"direccion\": \"Pontevedra\"\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8501/reservas/hotel",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"reservas",
+						"hotel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actualizarHotel",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Carlos Rodriguez\",\r\n    \"contrasena\": \"password789\",\r\n    \"hotel\": {\r\n        \"hotel_id\": 4,\r\n        \"nombre\": \"Albatros II\",\r\n        \"direccion\": \"Illa de man\"\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8501/reservas/hotel",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"reservas",
+						"hotel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eliminarHotel",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Carlos Rodriguez\",\r\n    \"contrasena\": \"password789\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8501/reservas/hotel/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"reservas",
+						"hotel",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtenerIdHotel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Carlos Rodriguez\",\r\n    \"contrasena\": \"password789\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8501/reservas/hotel/id/Hotel B",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"reservas",
+						"hotel",
+						"id",
+						"Hotel B"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtenerNombreHotel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Carlos Rodriguez\",\r\n    \"contrasena\": \"password789\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8501/reservas/hotel/nombre/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"reservas",
+						"hotel",
+						"nombre",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crearReserva",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Carlos Rodriguez\",\r\n    \"contrasena\": \"password789\",\r\n    \"reserva\": {\r\n        \"habitacion\":{\r\n            \"habitacion_id\": 17\r\n        },\r\n        \"fecha_inicio\": \"2025-05-03\",\r\n        \"fecha_fin\": \"2025-05-04\"\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8501/reservas",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"reservas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actualizarEstadoReserva",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Carlos Rodriguez\",\r\n    \"contrasena\": \"password789\",\r\n    \"reserva\": {\r\n        \"reserva_id\": 6,\r\n        \"estado\": \"Confirmada\"\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8501/reservas",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"reservas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listarReservasUsuario",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Juan Pérez\",\r\n    \"contrasena\": \"clave123\"    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8501/reservas",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"reservas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listarReservasEstado",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Ana Martínez\",\r\n    \"contrasena\": \"abcxyz\"   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8501/reservas/Confirmada",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"reservas",
+						"Confirmada"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "checkReservas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8501/reservas/check/2/2/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8501",
+					"path": [
+						"reservas",
+						"check",
+						"2",
+						"2",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
