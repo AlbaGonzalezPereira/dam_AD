@@ -1,18 +1,18 @@
 # TAREA 501
 
 ## MICROSERVICIOS REALIZADOS:
-He implementado todos los microservicios que se solicitaban (opcionales y obligatorios), realizando cada una de las partes, por lo cual, queriendo optar para ello a la puntuación máxima.
+Se han implementado todos los microservicios que se solicitaban (opcionales y obligatorios), realizando cada una de las partes.
 
-**Importante**: Tengo el APIGateway en el puerto 8081 ya que no me funcionaba en 8080.
+**Importante**: El APIGateway está en el puerto 8081, ya que no funcionaba en 8080.
 
 ## CONFIGURACIÓN:
 En este caso, le cambiamos el puerto 8080 a la API Gateway por el 8081 debido a que lo tenemos ocupado por otros servicios.
 
-## PASOS:
+## PASOS (desde Visual Studio Code):
 1. Si tenemos **un servicio**:
 - Tecleamos ``crtl + shift + p`` para que abra los comandos de VSCode.
-- Buscamos **Spring Initializer**.
-- **Configuramos** el nombre del paquete, versión del SpringBoot, si es Java, etc.
+- Buscamos **Spring Initializr**.
+- **Configuramos** el nombre del paquete, versión del SpringBoot (3.5), si es Java (17), etc.
 - Añadimos el **artifactId**, que tiene que ser igual al nombre del microservicio.
 - Añadimos las **dependencias** necesarias.
 - **Guardamos en la carpeta** donde va a estar el microservicio.
@@ -90,6 +90,60 @@ En este caso, le cambiamos el puerto 8080 a la API Gateway por el 8081 debido a 
     ```
     
 - Le damos a **actualizar todos los proyectos** (icono actualizar de Maven) para poder iniciarlos cuando los creemos.
+
+## CREAMOS LAS ENTIDADES, SERVICIOS Y CONTROLADORES CORRESPONDIENTES
+- **Entidad**:
+
+Literalmente, cada clase involucrada con el almacenamiento y recuperación de datos se denomina entidad y se identificará a través de JPA usando la anotación ``@Entity``.
+
+Por otro lado, también es recomendable marcar el identificador con la anotación ``@Id`` y establecer la estrategia de generación con ``@GeneratedValue``.
+
+  - ``@Table(name = "")`` --> MySQL
+  - ``@Document(name ="")`` --> MongoDB
+
+- **Repositorio**:
+
+Básicamente, un repositorio reúne todas las operaciones de datos para un tipo de dominio determinado en un solo lugar. Se utiliza la anotación ``@Repository``. Es una interfaz. Haremos un repositorio por cada entidad.
+
+Para definir un repositorio es necesario crear una interfaz en Java que extienda la interfaz ``JpaRepository`` o de ``MongoRepository`` la cual recibirá dos parámetros:
+
+  - La entidad o dominio que se va a utilizar.
+  - El tipo de dato del Id.
+
+Spring Data ofrece la posibilidad de definir el repositorio solo con la interfaz. Esta será implementada automáticamente en tiempo de ejecución cuando la aplicación se ejecute, utilizando la anotación ``@Autowired``.
+
+
+
+- **Servicio**:
+
+Un servicio se encarga de conectar varios respositorios y agrupar la lógica del sistema y su funcionalidad.
+
+Para la **creación de un servicio** se necesitará:
+
+  - Definir una clase en Java
+  - Utilizar la anotación ``@Service``
+  - Establecer la variable de conexión con los distintos repositorios.
+  - Definir los métodos que permitan recibir la información del controlador, procesarla, hacer las peticiones correspondientes a los repositorio y devolver la solución al controlador.
+  
+  Crearemos objetos privados del repositorio con ``@Autowired``. Un servicio por repositorio.
+
+- **Controlador**: 
+Para definir un controlador definiremos una clase en Java que tendrá la anotación ``@Controller`` o ``@RestController``. Esto permite que Spring automáticamente lo detecte y cree un Bean de la clase en el contexto de aplicación Spring. Además, se usará la anotación ``@RequestMapping("/ruta")`` para indicar la URL base de la aplicación.
+
+Por otro lado, para coger el valor ``/{reader}`` y parsearlo a una variable del método se utilizará la anotación ``@PathVariable("reader")``.
+
+Aquí se llaman a todos todos los servicios con ``@Autowired``.
+
+- **DTO**:
+
+Los dto son objetos que se usan para transportar datos entre capas.
+
+Sus **principales usos** son:
+
+  - Evitar exponer las entidades de la base de datos o los modelos de nuestra aplicación.
+  - Permitir ensamblar distintos objetos.
+  - Eliminar campos que no queremos que se vean.
+  - Pasar de un tipo de dato a otro.
 
 ## CONSULTAS GRAPHIQL:
 
@@ -229,3 +283,5 @@ En este caso, le cambiamos el puerto 8080 a la API Gateway por el 8081 debido a 
         })
     }
     ```
+
+
