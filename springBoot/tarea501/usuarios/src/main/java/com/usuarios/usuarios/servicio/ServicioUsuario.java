@@ -64,13 +64,12 @@ public class ServicioUsuario {
         }
 
         return null; //si no lo encuentra
-
     }
 
     /**
      * servicio que busca un usuario si coincide su nombre y su contraseña
      * @param user
-     * @return true/false
+     * @return
      */
     public Boolean validarUsuario(Usuario user){
         List<Usuario> usuarios = repoUser.findAll();
@@ -87,30 +86,42 @@ public class ServicioUsuario {
         }
 
         return false; //si no lo encuentra
-
     }
 
+    /**
+     * servicio que obtiene el nombre de un usuario a partir de su identificador
+     * @param id
+     * @return
+     */
     public String obtenerInfoUsuarioPorId(Integer id){
         Optional<Usuario> usuarioBd = repoUser.findById(id);
         if (usuarioBd.isPresent()) { //si existe en la base de datos
-            return usuarioBd.get().nombre; // Delvemos el nombre del usuario
+            return usuarioBd.get().nombre; // Devolvemos el nombre del usuario
         } else {
             return null; // Si no existe en la base de datos, devolvemos null para que no lo cree
         }
-
     }
 
+    /**
+     * servicio que obtiene el ID de un usuario a partir de su nombre. 
+     * @param nombre
+     * @return
+     */
     public Integer obtenerInfoUsuarioPorNombre(String nombre){
         Usuario usuarioInfo = repoUser.findByNombre(nombre);
 
         if (usuarioInfo != null) { //si no existe en la base de datos
-            return usuarioInfo.getUsuario_id(); // Delvemos el id del usuario
+            return usuarioInfo.getUsuario_id(); // Devolvemos el id del usuario
        } else {
            return null; // Si no existe en la base de datos, devolvemos null para que no lo cree
        }
-
     }
 
+    /**
+     * servicio que comprueba si un usuario existe.
+     * @param id
+     * @return
+     */
     public Boolean checkIfExist(Integer id) {
         Optional<Usuario> usuarioExist = repoUser.findById(id);
         if (usuarioExist.isPresent()) { //si existe en la base de datos
@@ -118,6 +129,5 @@ public class ServicioUsuario {
         } else {
             return false; // Si no existe en la base de datos, devolvemos false
         }
-
     }
 }
