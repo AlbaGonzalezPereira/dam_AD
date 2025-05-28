@@ -1,0 +1,71 @@
+type Mutation{
+    crearLibro(input: LibroInput!): Libro
+    crearPrestamo(input: PrestamoInput!): Prestamo
+
+}
+
+type Query{
+    consulta1 : [Consulta1DTO]
+    consulta3 : [Consulta2DTO]
+    consulta8(fecha1 : String, fecha2 : String) : [Consulta8DTO]
+    consulta9(id : Int) : [Consulta8DTO]
+}
+
+input LibroInput{
+    titulo: String,
+    autor: String,
+    anoPublicacion: Int
+}
+
+input PrestamoInput{
+    idLibro: Int,
+    idSocio: Int,
+    fechaPrestamo: Int,
+    fechaDevolucion: String
+}
+
+type Libro{
+    idLibro : Int,
+    titulo : String,
+    autor : String,
+    anhoPublicacion : Int,
+    listaPrestamo : [Prestamo]
+}
+
+type Prestamo{
+    idPrestamo : Int,
+    fechaPrestamo : String,
+    fechaDevolucion : String,
+    socio : Socio,
+    libro : Libro
+}
+
+type Socio{
+    idSocio : Int,
+    nombre : String,
+    direccion : String,
+    fechaInscripcion : String,
+    listaPrestamos : [Prestamo]
+}
+
+type Consulta1DTO{
+    idLibro : Int,
+    titulo : String,
+    autor : String,
+    anhoPublicacion : Int,
+    nombreSocio : String,
+    direccionSocio : String
+}
+
+type Consulta2DTO{
+    titulo : String,
+    nombreSocio : String,
+    fechaPrestamo : String,
+    fechaDevolucion : String
+}
+
+type Consulta8DTO{
+    titulo: String,
+    fechaPrestamo: String,
+    fechDevolucion: String
+}
