@@ -5,7 +5,6 @@ En este proyecto vamos a desarrollar una aplicación que permita validar y gesti
 
 El **diagrama conceptual** de la base de datos es el siguiente:
 ![Diagrama conceptual](diagrama.png)
-<img src="diagrama.png" alt="Diagrama conceptual" />
 
 El **script** correspondiente de la base de datos será ``bd-hospital.sql``.
 
