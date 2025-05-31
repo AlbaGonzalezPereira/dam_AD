@@ -1,11 +1,9 @@
 package com.examenud5.empresa.controlador;
 
-import com.examenud5.empresa.entities.Proyecto;
 import com.examenud5.empresa.servicios.ServicioDepartamento;
 import com.examenud5.empresa.servicios.ServicioEmpleado;
 import com.examenud5.empresa.servicios.ServicioProyecto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
