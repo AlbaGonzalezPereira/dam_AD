@@ -4,6 +4,7 @@
 En este proyecto vamos a desarrollar una aplicación que permita validar y gestionar la estructura de un hospital.
 
 El **diagrama conceptual** de la base de datos es el siguiente:
+<br>
 ![Diagrama conceptual](diagrama.png)
 
 El **script** correspondiente de la base de datos será ``bd-hospital.sql``.
