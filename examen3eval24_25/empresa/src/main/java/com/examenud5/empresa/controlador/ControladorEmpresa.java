@@ -47,6 +47,6 @@ public class ControladorEmpresa {
         ResponseEntity<String> empleado = rt.getForEntity("http://192.168.109.17:8502/nombre/" + id, String.class);
         String nombreDepartamento = departamento.getBody();
         String nombreEmpleado = empleado.getBody();
-        return ResponseEntity.ok(nombreEmpleado + " " + nombreDepartamento);
+        return ResponseEntity.ok(nombreEmpleado + " - " + nombreDepartamento);
     }
 }
