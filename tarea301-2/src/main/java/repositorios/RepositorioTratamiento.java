@@ -101,7 +101,7 @@ public class RepositorioTratamiento implements Repositorio<Tratamiento>{
         Hospital hospital = repoHos.buscarByName(nombre);
     
         Transaction transacion = sesion.beginTransaction(); // para comenzar una transación
-        int tratamientos = (Integer) sesion.createQuery("SELECT COUNT(*) FROM Tratamiento GROUP BY id_hospital ").uniqueResult();
+        int tratamientos = (Integer) sesion.createQuery("SELECT COUNT(*) FROM Tratamiento WHERE id_hospital =:idH GROUP BY id_hospital").setParameter("idH", hospital.getId()).uniqueResult();
         transacion.commit();
         if (tratamientos == 0) {
             System.out.println("No hay tratamientos");
