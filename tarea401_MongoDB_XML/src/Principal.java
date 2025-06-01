@@ -215,13 +215,13 @@ public class Principal {
      * id, titulo, precio, disponibilidad, edad_minima_recomendada y
      * plataforma).
      */
-    private static void listarVideojuegosPorEdad() {
+     private static void listarVideojuegosPorEdad() {
         System.out.println("Introduce la edad mínima recomendada:");
         int edadMinima = Integer.parseInt(sc.nextLine());
         String consulta = "for $v in " + bbdd + "//videojuego"
-                + "where $v/edad_minima_recomendada <= " + edadMinima
-                + "order by xs:integer($v/edad_minima_recomendada)"
-                + "return <videojuego>\n"
+                + " where $v/edad_minima_recomendada <= " + edadMinima
+                + " order by xs:integer($v/edad_minima_recomendada)"
+                + " return <videojuego>\n"
                 + "{$v/id}\n"
                 + "{$v/titulo}\n"
                 + "{$v/precio}\n"
