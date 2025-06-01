@@ -1,0 +1,91 @@
+<universidad>
+    <facultad id="F001" nombre="Ingeniería">
+        <departamento id="D001" nombre="Computación">
+            <curso id="C001" nombre="Algoritmos y Estructuras de Datos">
+                <profesor id="P001" nombre="Dr. Juan Pérez" antigüedad="5">
+                    <horario dia="Lunes" hora="10:00" aula="A101"/>
+                    <horario dia="Miércoles" hora="10:00" aula="A101"/>
+                </profesor>
+                <profesor id="P002" nombre="M. Sc. Ana Gómez" antigüedad="2">
+                    <horario dia="Martes" hora="14:00" aula="B202"/>
+                    <horario dia="Jueves" hora="14:00" aula="B202"/>
+                </profesor>
+            </curso>
+            <curso id="C002" nombre="Bases de Datos">
+                <profesor id="P003" nombre="Ing. Carlos Sánchez" antigüedad="3">
+                    <horario dia="Martes" hora="9:00" aula="C303"/>
+                    <horario dia="Jueves" hora="9:00" aula="C303"/>
+                </profesor>
+            </curso>
+            <curso id="C005" nombre="Programación Avanzada">
+                <profesor id="P006" nombre="Dr. Manuel López" antigüedad="8">
+                    <horario dia="Lunes" hora="13:00" aula="C304"/>
+                    <horario dia="Miércoles" hora="13:00" aula="C304"/>
+                </profesor>
+                <profesor id="P007" nombre="M. Sc. Laura Fernández" antigüedad="4">
+                    <horario dia="Viernes" hora="15:00" aula="C305"/>
+                </profesor>
+            </curso>
+        </departamento>
+        <departamento id="D002" nombre="Electrónica">
+            <curso id="C003" nombre="Circuitos Electrónicos">
+                <profesor id="P004" nombre="Dr. Luis Pérez" antigüedad="10">
+                    <horario dia="Lunes" hora="8:00" aula="D404"/>
+                    <horario dia="Miércoles" hora="8:00" aula="D404"/>
+                </profesor>
+            </curso>
+            <curso id="C006" nombre="Sistemas Digitales">
+                <profesor id="P008" nombre="Ing. Roberto García" antigüedad="6">
+                    <horario dia="Martes" hora="12:00" aula="D405"/>
+                    <horario dia="Jueves" hora="12:00" aula="D405"/>
+                </profesor>
+            </curso>
+        </departamento>
+    </facultad>
+    <facultad id="F002" nombre="Ciencias Sociales">
+        <departamento id="D003" nombre="Psicología">
+            <curso id="C004" nombre="Psicología General">
+                <profesor id="P005" nombre="M. Sc. Claudia Ríos" antigüedad="4">
+                    <horario dia="Lunes" hora="11:00" aula="E505"/>
+                    <horario dia="Miércoles" hora="11:00" aula="E505"/>
+                </profesor>
+            </curso>
+            <curso id="C007" nombre="Psicología Cognitiva">
+                <profesor id="P009" nombre="Dr. Alejandro Rodríguez" antigüedad="7">
+                    <horario dia="Martes" hora="10:00" aula="E506"/>
+                    <horario dia="Jueves" hora="10:00" aula="E506"/>
+                </profesor>
+            </curso>
+        </departamento>
+        <departamento id="D004" nombre="Sociología">
+            <curso id="C008" nombre="Sociología Básica">
+                <profesor id="P010" nombre="Lic. Laura Ramírez" antigüedad="3">
+                    <horario dia="Lunes" hora="8:00" aula="F507"/>
+                    <horario dia="Miércoles" hora="8:00" aula="F507"/>
+                </profesor>
+            </curso>
+            <curso id="C009" nombre="Teoría Sociológica Contemporánea">
+                <profesor id="P011" nombre="Dr. Francisco Pérez" antigüedad="5">
+                    <horario dia="Martes" hora="15:00" aula="F508"/>
+                    <horario dia="Jueves" hora="15:00" aula="F508"/>
+                </profesor>
+            </curso>
+        </departamento>
+    </facultad>
+    <facultad id="F003" nombre="Artes y Humanidades">
+        <departamento id="D005" nombre="Historia del Arte">
+            <curso id="C010" nombre="Historia del Arte Medieval">
+                <profesor id="P012" nombre="M. Sc. Pedro González" antigüedad="2">
+                    <horario dia="Lunes" hora="9:00" aula="G601"/>
+                    <horario dia="Miércoles" hora="9:00" aula="G601"/>
+                </profesor>
+            </curso>
+            <curso id="C011" nombre="Arte Contemporáneo">
+                <profesor id="P013" nombre="Dr. Marta López" antigüedad="6">
+                    <horario dia="Martes" hora="14:00" aula="G602"/>
+                    <horario dia="Jueves" hora="14:00" aula="G602"/>
+                </profesor>
+            </curso>
+        </departamento>
+    </facultad>
+</universidad>

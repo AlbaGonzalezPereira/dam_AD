@@ -1,4 +1,4 @@
-
+package examen2eval2025_parte2;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
