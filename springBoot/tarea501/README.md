@@ -284,4 +284,128 @@ Sus **principales usos** son:
     }
     ```
 
+## schema.graphqls
+```graphql
+type Mutation {
+    crearComentario(comentario: DTOComentario):DTOComentarioInfo
+    eliminarComentarios:String
+    eliminarComentarioDeUsuario(comentarioEliminado: DTOComentarioDelete): String
+}
 
+type Query {
+    listarComentariosHotel(comentario: DTOComentarioHotel): [DTOComentarioInfo]
+    listarComentariosUsuario(usuario: DTOUsuario): [DTOComentarioInfo]
+    mostrarComentarioUsuarioReserva(comentario: DTOComentario): [DTOComentarioInfo]
+    puntuacionMediaHotel(comentarioHotel: DTOComentarioHotel): Float
+    puntuacionesMediasUsuario(usuario: DTOUsuario): Float
+    _empty: String
+}
+
+input DTOComentario {
+    nombre: String
+    contrasena: String
+    nombreHotel: String
+    reservaId: Int
+    puntuacion: Float
+    comentario: String
+}
+
+input DTOComentarioDelete {
+    comentarioId: String
+    nombre: String
+    contrasena: String
+}
+
+input DTOUsuario {
+    nombre: String
+    contrasena: String
+}
+
+input DTOComentarioHotel {
+    nombreHotel: String
+    nombre: String
+    contrasena: String
+}
+
+type DTOComentarioInfo {
+    nombreHotel: String
+    reservaId: Int
+    puntuacion: Float
+    comentario: String
+}
+```
+
+## eureka properties
+```properties
+spring.application.name=eureka
+server.port=8500
+eureka.instance.hostname=localhost
+eureka.client.registerWithEureka=false
+eureka.client.fetchRegistry=false
+eureka.client.serviceUrl.defaultZone=http://${eureka.instance.hostname}:${server.port}/eureka/
+```
+
+En la clase principal ponemos ``@EnableEurekaServer``.
+
+```java
+@EnableEurekaServer
+@SpringBootApplication
+public class EurekaApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(EurekaApplication.class, args);
+	}
+}
+```
+
+## gateway bean
+
+Colocamos el RouteLocator justo debajo del método main con el ``@Bean``.
+
+```java
+@Bean
+public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
+	return builder.routes()
+    .route("usuarios", r -> r.path("/usuarios/**")
+            .uri("lb://usuarios"))
+    .route("reservas", r -> r.path("/reservas/**")
+            .uri("lb://reservas"))
+    .route("comentarios", r -> r.path("/comentarios")
+            .uri("lb://comentarios:8503/comentarios"))
+    .build();
+}
+```
+
+```properties
+spring.application.name=gateway
+server.port=8081
+eureka.client.serviceUrl.defaultZone=http://localhost:8500/eureka/
+spring.cloud.gateway.discovery.locator.enabled=true
+spring.graphql.graphiql.enabled=true
+spring.graphql.path=/comentarios
+```
+
+## rest + mysql
+```properties
+spring.application.name=reservas
+server.port=8501
+spring.datasource.url=jdbc:mysql://localhost:3306/reservasproyecto?createDatabaseIfNotExist=true
+spring.datasource.username=root
+spring.datasource.password=
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+spring.jpa.hibernate.ddl-auto=validate
+eureka.client.serviceUrl.defaultZone=http://localhost:8500/eureka/
+```
+
+## graphql mongo
+```properties
+spring.application.name=comentarios
+server.port=8503
+eureka.client.serviceUrl.defaultZone=http://localhost:8500/eureka/
+spring.data.mongodb.uri=mongodb://localhost:27017/comentariosProyecto
+spring.data.mongodb.host=localhost
+spring.data.mongodb.port=27017
+spring.graphql.graphiql.enabled=true
+spring.graphql.graphiql.path=/graphiql
+spring.graphql.path=/comentarios
+```

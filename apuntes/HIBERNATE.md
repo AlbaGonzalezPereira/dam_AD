@@ -149,3 +149,121 @@ Por ejemplo:
   </session-factory>
 </hibernate-configuration>
 ```
+## Métodos persist(), merge() y remove() en JPA (Hibernate):
+
+1. ``persist(Object entity)``
+   - Inserta una nueva entidad en la base de datos.
+   - Solo funciona con entidades nuevas (estado transient).
+   - La entidad pasa al estado managed.
+   - No devuelve nada.
+
+  ```java
+  Vulnerabilidad nuevaVulnera = new Vulnerabilidad(nombre, descripcion, nivel); //creamos una vulnerabilidad
+  session.persist(nuevaVulnera); //guardamos
+  trt.commit();
+  ```
+
+2. ``merge(Object entity)``
+   - Actualiza una entidad existente o la inserta si no existe.
+   - Devuelve una copia gestionada de la entidad.
+
+
+  ```java
+  /**
+   * método que asigna una vulnerabilidad a un sistema. La asignación será
+   * bidireccional.
+   *
+   * @param session
+   */
+  private static void asignarVulnerabilidadSistema(Session session) {
+      Transaction trt = session.beginTransaction(); //iniciamos una transación
+      System.out.println("Introduce el id de la vulnerabilidad: ");
+      int idVulnera = Integer.parseInt(sc.nextLine());
+      Vulnerabilidad vulneraEncontrado = getVulneraById(idVulnera, session);
+      System.out.println("Introduce el id del sistema: ");
+      int idSistema = Integer.parseInt(sc.nextLine());
+      Sistema sistemaEncontrado = getSistemaById(idSistema, session);
+      if (vulneraEncontrado != null && sistemaEncontrado != null) {
+          vulneraEncontrado.setSistemaBidireccional(sistemaEncontrado);
+          sistemaEncontrado.setVulnerabilidadBidireccional(vulneraEncontrado);
+          session.merge(vulneraEncontrado);
+      }
+      trt.commit();
+  }
+  ```
+
+3. ``remove(Object entity)``
+   - Elimina una entidad del contexto y luego de la base de datos.
+  ```java
+  EntityManager em = emf.createEntityManager();
+  em.getTransaction().begin();
+
+  Alumno alumno = em.find(Alumno.class, 1L);
+  if (alumno != null) {
+      em.remove(alumno); // Elimina el alumno
+  }
+
+  em.getTransaction().commit();
+  em.close();
+  ```
+
+## Bidireccionalidad:
+
+1. **ONE TO ONE**:
+
+Entidad Vulnerabilidad:
+```java
+@OneToOne(mappedBy = "vulnerabilidad") //ponemos el nombre de la clase de OneToOne
+private Solucion solucion;
+
+//creamos un método para asignar una solución a una vulnerabilidad y viceversa
+public void setSolucionBidireccional(Solucion solu) {
+    this.solucion = solu;
+    solu.setVulnerabilidad(this); //asignamos la solución a la vulnerabilida
+}
+```
+Entidad Solución:
+
+```java
+@OneToOne 
+@JoinColumn(name="id_vulnerabilidad") //ponemos en name como se llame en la base de datos
+// private int id_vulnerabilidad;
+private Vulnerabilidad vulnerabilidad; //usamos la clase
+private String descripcion;
+
+//creamos un método para asignar una vulnerabilidad a una solución y viceversa
+public void setVulnerabilidadBidireccional(Vulnerabilidad vulnera){
+    this.vulnerabilidad = vulnera;
+    vulnera.setSolucion(this); //asignamos la vulnerabilidad a la solución
+}
+```
+
+2. **ONE TO MANY**:
+Entidad Ataque
+
+```java
+@OneToMany(mappedBy = "ataque") 
+  private List<Permite> permites;
+  
+  //donde tenga la lista hacemos esto:
+  public void setPermiteBidireccional(Permite perm) {
+      this.permites.add(perm);
+      perm.setAtaqueBidireccional(this); //asignamos el permite al ataque
+  }
+```
+
+Entidad Permite:
+
+```java
+//private int id_ataque;
+  @ManyToOne
+  @JoinColumn(name="id_ataque") 
+  private Ataque ataque;
+  private Byte impacto;
+  private LocalDate fecha_detectada;
+  
+  public void setAtaqueBidireccional(Ataque ataque) {
+      this.ataque = ataque;
+  }
+```
+
