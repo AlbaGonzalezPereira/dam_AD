@@ -1,10 +1,13 @@
-# BASES DE DATOS XML Y MONGODB
+# BASES DE DATOS XML
 
 ## BaseX y XQuery
-BaseX es una base de datos XML nativa y un procesador de XQuery que permite almacenar, consultar y manipular documentos XML de manera eficiente. XQuery es un lenguaje diseñado para consultar y transformar datos XML, similar a cómo SQL se utiliza para bases de datos relacionales.
 
-1. **Estructura FLWOR**
-La mayoría de las consultas utilizan la estructura FLWOR (``For``, ``Let``, ``Where``, ``Order by``, ``Return``), que permite iterar, filtrar, ordenar y retornar datos.
+BaseX es una **base de datos XML nativa** y un **procesador de XQuery** que permite **almacenar**, **consultar** y **manipular** documentos XML de manera eficiente. 
+
+XQuery es un lenguaje diseñado para consultar y transformar datos XML, similar a cómo SQL se utiliza para bases de datos relacionales.
+
+1. **Estructura FLWOR**: 
+La mayoría de las consultas utilizan la estructura FLWOR (``For``, ``Let``, ``Where``, ``Order by``, ``Return``), que permite iterar, filtrar, ordenar y retornar datos. Es similar a ``SELECT`` en SQL:
 
     ```xquery
     (:Selecciona los nombres de los autores mayores de 50 años, ordenados alfabéticamente.:)
@@ -14,7 +17,7 @@ La mayoría de las consultas utilizan la estructura FLWOR (``For``, ``Let``, ``W
     return $autor/nombre
     ```
 
-2. **Funciones de agregación**
+2. **Funciones de agregación**: 
 Se utilizan funciones como ``count()``, ``sum()``, ``avg()``, ``min()`` y ``max()`` para realizar cálculos sobre conjuntos de datos.
 
     ```xquery
@@ -24,7 +27,7 @@ Se utilizan funciones como ``count()``, ``sum()``, ``avg()``, ``min()`` y ``max(
     return $x/@antigüedad)
     ```
 
-3. **Acceso a atributos**
+3. **Acceso a atributos**: 
 Para acceder a atributos se utiliza la sintaxis ``@atributo``.
 
     ```xquery
@@ -32,7 +35,63 @@ Para acceder a atributos se utiliza la sintaxis ``@atributo``.
     where $x/horario[@dia="Lunes"]
     return $x/@antigüedad
     ```
+## Trabajando con BaseX
 
+1. **Preparamos el entorno**
+
+   - Ejecutamos BaseX GUI
+   - Importamos la base de datos
+   - Ejecutamos en la carpeta de BaseX → bin → basexserver.bat (cliente Java)
+
+2. **Creamos la base de datos**
+   - Database → New → Selección.
+   - Cargamos el archivo XML con el que vamos a trabajar (universidad.xml, autores.xml, etc.).
+   - Le damos un nombre (por ejemplo, universidad) y pulsamos Create.
+
+3. **Creamos el archivo de consultas**
+   -  le llamaremos ``nombre.xq``
+   -  Haremos las consultas consultas con XQuery separadas por "``,``", si van en el mismo archivo (solo si se usa como script).
+  
+## Actualizar datos (Modo Update)
+
+1. **``replace value of node``**: Modifica solo el contenido del nodo.
+
+    Ejemplo: Cambiamos un nombre
+
+    ```xquery
+    replace value of node //profesor[@id="P001"]/nombre
+    with "Laura Martínez"
+    ```
+
+2. **``insert node``**: Inserta un nuevo nodo.
+   
+   Ejemplo: Insertamos un nuevo profesor
+
+    ```xquery
+    insert node <profesor id="P005"><nombre>Ana Ruiz</nombre></profesor>
+    into //profesores
+    ```
+
+3. **``delete node``**: Elimina un nodo.
+
+    Ejemplo: Eliminamos un profesor
+    ```xquery
+    delete node //profesor[@id="P004"]
+    ```
+
+4. **``rename node``**: Cambia el nombre de una etiqueta.
+   
+    ```xquery
+    rename node //profesor[@id="P001"]/nombre
+    as "nombre_completo"
+    ```
+
+## Funciones útiles
+- ``db:open("universidad")``: abre una base XML ya almacenada
+- ``db:list()``: lista las bases disponibles
+- ``db:exists("nombreBD")``: comprueba si existe
+
+## Estructuras importantes
 ```java
 //Cuando tenemos el try - catch en el main...
 

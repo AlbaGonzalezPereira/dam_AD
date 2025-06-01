@@ -1,5 +1,7 @@
 # HIBERNATE
-Hibernate es un framework de mapeo objeto-relacional (ORM) para Java que facilita la persistencia de objetos Java en bases de datos relacionales. Permite trabajar directamente con objetos Java sin necesidad de escribir código SQL manual, lo que simplifica el desarrollo y mantenimiento de aplicaciones.
+Hibernate es un **framework de mapeo objeto-relacional (ORM)** para Java que facilita la persistencia de objetos Java en bases de datos relacionales. 
+
+Permite trabajar directamente con objetos Java sin necesidad de escribir código SQL manual, lo que simplifica el desarrollo y mantenimiento de aplicaciones.
 
 ## Anotaciones:
 
@@ -149,7 +151,8 @@ Por ejemplo:
   </session-factory>
 </hibernate-configuration>
 ```
-## Métodos persist(), merge() y remove() en JPA (Hibernate):
+## Métodos de Session en Hibernate
+persist(), merge() y remove() en JPA (Hibernate):
 
 1. ``persist(Object entity)``
    - Inserta una nueva entidad en la base de datos.
@@ -206,6 +209,14 @@ Por ejemplo:
   em.getTransaction().commit();
   em.close();
   ```
+
+4. ``get()`` / ``find()``	
+   - Busca por ID.
+  
+
+5. ``createQuery()``	
+   - Ejecuta una consulta HQL.
+  
 
 ## Bidireccionalidad:
 
@@ -267,3 +278,44 @@ Entidad Permite:
   }
 ```
 
+## HQL (Hibernate Query Language)
+
+### Devolver resultados:
+1. ``uniqueResult()``
+  - Devuelve un **único resultado** (puede ser un objeto, un array, o una tupla dependiendo de la consulta).
+  - Lanza excepción si hay más de un resultado.
+  
+  ```java
+  String descripcion = session.createQuery(
+    "SELECT s.descripcion FROM Solucion s WHERE s.vulnerabilidad = :vulnera", String.class)
+    .setParameter("vulnera", vulneraConsulta)
+    .uniqueResult();
+  ```
+
+  ```java
+  session.createQuery("FROM Vulnerabilidad WHERE nombre = :nombre")
+       .setParameter("nombre", "Ransomware")
+       .uniqueResult();
+  ```
+
+2. ``list()``
+  - Devuelve una **lista completa** de resultados.
+  - Se usa cuando pueden haber múltiples filas como resultado. 
+  
+  ```java
+  List<String> descripciones = session.createQuery(
+    "SELECT s.descripcion FROM Solucion s WHERE s.vulnerabilidad = :vulnera", String.class)
+    .setParameter("vulnera", vulneraConsulta)
+    .list();
+  ```
+
+3. ``Object[] resultado = ...``
+   - Cuando estás seleccionando **múltiples columnas** en la consulta.
+   - Si solo seleccionas una columna, no necesitas un array.
+
+```java
+Object[] resultado = session.createQuery(
+    "SELECT v.nombre, v.descripcion FROM Vulnerabilidad v WHERE v.id = :id", Object[].class)
+    .setParameter("id", 1)
+    .uniqueResult();
+```
