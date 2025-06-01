@@ -39,7 +39,6 @@ public class Ejercicio2 {
 
     /**
      * método que imprime todas las consultas
-     *
      * @param cliente
      * @param consulta
      */
@@ -75,6 +74,11 @@ public class Ejercicio2 {
         }
     }
 
+    /**
+     * método que cuenta el número de profesores que hay en un departamento dado.
+     * Solución: para el departamento Psicología: 2 profesores
+     * @param cliente 
+     */
     private static void contarProfesores(BaseXClient cliente) {
         String departamento = pedirString("Introduce el departamento: ");
         String consulta = "for $x in " + documento + "//departamento where $x[@nombre=\"" + departamento + "\"] return count($x//profesor)";
@@ -82,7 +86,13 @@ public class Ejercicio2 {
         imprimirConsultas(cliente, consulta);
         System.out.println("");
     }
+    
 
+    /**
+     * método que saca la media de antigüedad de los profesores de la facultad de Ingeniería que trabajan algún Lunes. 
+     * Solución: 7.666…
+     * @param cliente 
+     */
     private static void sacarMediaProfesores(BaseXClient cliente) {
         String consulta = "avg(for $p in " + documento + "//facultad[@nombre=\"Ingeniería\"]//profesor \n"
                 + "let $h := for $pr in $p\n"
@@ -95,6 +105,11 @@ public class Ejercicio2 {
         System.out.println("");
     }
 
+    /**
+     * método que saca el número medio de cursos ofrecidos por cada facultad. 
+     * Solución: 3.66…
+     * @param cliente 
+     */
     private static void sacarMediaCursos(BaseXClient cliente) {
         String consulta = "avg(for $x in " + documento +"//facultad\n"
                 + "return count($x//curso))";
