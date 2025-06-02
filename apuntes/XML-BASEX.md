@@ -38,11 +38,9 @@ Para acceder a atributos se utiliza la sintaxis ``@atributo``.
 ## Trabajando con BaseX
 
 1. **Preparamos el entorno**
-
    - Ejecutamos BaseX GUI
    - Importamos la base de datos
-   - Ejecutamos en la carpeta de BaseX → bin → basexserver.bat (cliente Java)
-
+   
 2. **Creamos la base de datos**
    - Database → New → Selección.
    - Cargamos el archivo XML con el que vamos a trabajar (universidad.xml, autores.xml, etc.).
@@ -51,7 +49,12 @@ Para acceder a atributos se utiliza la sintaxis ``@atributo``.
 3. **Creamos el archivo de consultas**
    -  le llamaremos ``nombre.xq``
    -  Haremos las consultas consultas con XQuery separadas por "``,``", si van en el mismo archivo (solo si se usa como script).
-  
+   -  Probamos las consultas
+
+4. **Vamos a Netbeans**
+    - Cerramos BaseX
+    - Ejecutamos en la carpeta de BaseX → bin → basexserver.bat (cliente Java) en modo administrador.
+
 ## Actualizar datos (Modo Update)
 
 1. **``replace value of node``**: Modifica solo el contenido del nodo.
