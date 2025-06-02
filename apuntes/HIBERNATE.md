@@ -43,6 +43,12 @@ Algunas de las **anotaciones más importantes** son:
 
 - **``@Transient``**: permite excluir un campo de ser persistente de la base de datos
 
+- **``@NamedQuery``**: declara el nombre de una consulta a una entidad.
+
+- **``@NamedNativeQuery``**: declara una consulta SQL nativa a una entidad.
+
+Tenemos otras anotaciones de relaciones:
+
 - **``@OneToOne``**: define una relación 1:1 entre dos entidades
 
 - **``@OneToMany``**: define una relación 1:N entre dos entidades
@@ -51,9 +57,7 @@ Algunas de las **anotaciones más importantes** son:
 
 - **``@JoinColumn``**: especifica la columna que actúa como clave foránea en una relación
 
-- **``@NamedQuery``**: declara el nombre de una consulta a una entidad.
-
-- **``@NamedNativeQuery``**: declara una consulta SQL nativa a una entidad.
+- **``mappedBy``**: indica el propietario de la relación (para relaciones bidireccionales)
 
 <br>
 
@@ -117,6 +121,15 @@ Es el archivo de **configuración principal** de Hibernate. Aquí se especifican
 - Y las clases que Hibernate debe mapear.
 
 **Mapear una clase** significa decirle a Hibernate qué clase Java debe estar vinculada a una tabla de la base de datos.
+
+Ejemplo para registrar entidades:
+
+```xml
+<mapping class="entidades.Tratamiento" />
+<mapping class="entidades.Hospital" />
+```
+
+Debe ir dentro de ``<session-factory>``.
 
 Cuando usas anotaciones como ``@Entity``, ya estás indicando que una clase es una entidad. Pero Hibernate necesita saber cuáles de esas clases debe cargar al iniciar. Para eso sirve esta línea:
 
@@ -217,105 +230,189 @@ persist(), merge() y remove() en JPA (Hibernate):
 5. ``createQuery()``	
    - Ejecuta una consulta HQL.
   
+## Transacciones en Hibernate
+Hibernate permite gestionar transacciones de base de datos mediante su API, utilizando ``Transaction``. Toda operación debe ir dentro de una transacción.
+
+Para ello, se sigue esta **estructura** típica:
+```java
+Session session = sessionFactory.openSession(); // Abrimos sesión
+Transaction trt = session.beginTransaction();   // Comienza transacción
+
+// Operaciones: persist(), merge(), remove(), etc.
+session.persist(entidad); 
+
+trt.commit(); // Confirmamos cambios
+session.close(); // Cerramos la sesión
+```
+
+Antes de realizar operaciones como persist(), merge() o remove(), es necesario **iniciar una transacción**:
+
+```java
+Transaction trt = session.beginTransaction(); // Inicia una transacción
+```
+
+Después de realizar las operaciones, se debe **confirmar**:
+
+```java
+trt.commit(); // Confirma los cambios en la base de datos
+```
+
+En caso de error, puede hacerse:
+```java
+trt.rollback(); // Revierte los cambios si ocurre un fallo
+```
+
 
 ## Bidireccionalidad:
 
 1. **ONE TO ONE**:
+    ```java
+    // Clase A
+    @OneToOne(mappedBy = "a")
+    private ClaseB b;
 
-Entidad Vulnerabilidad:
-```java
-@OneToOne(mappedBy = "vulnerabilidad") //ponemos el nombre de la clase de OneToOne
-private Solucion solucion;
+    // Clase B
+    @OneToOne
+    @JoinColumn(name = "a_id")
+    private ClaseA a;
+    ```
 
-//creamos un método para asignar una solución a una vulnerabilidad y viceversa
-public void setSolucionBidireccional(Solucion solu) {
-    this.solucion = solu;
-    solu.setVulnerabilidad(this); //asignamos la solución a la vulnerabilida
-}
-```
-Entidad Solución:
+    **Entidad Vulnerabilidad**:
 
-```java
-@OneToOne 
-@JoinColumn(name="id_vulnerabilidad") //ponemos en name como se llame en la base de datos
-// private int id_vulnerabilidad;
-private Vulnerabilidad vulnerabilidad; //usamos la clase
-private String descripcion;
+    ```java
+    @OneToOne(mappedBy = "vulnerabilidad") //ponemos el nombre de la clase de OneToOne
+    private Solucion solucion;
 
-//creamos un método para asignar una vulnerabilidad a una solución y viceversa
-public void setVulnerabilidadBidireccional(Vulnerabilidad vulnera){
-    this.vulnerabilidad = vulnera;
-    vulnera.setSolucion(this); //asignamos la vulnerabilidad a la solución
-}
-```
+    //creamos un método para asignar una solución a una vulnerabilidad y viceversa
+    public void setSolucionBidireccional(Solucion solu) {
+        this.solucion = solu;
+        solu.setVulnerabilidad(this); //asignamos la solución a la vulnerabilida
+    }
+    ```
 
-2. **ONE TO MANY**:
-Entidad Ataque
+    **Entidad Solucion**:
 
-```java
-@OneToMany(mappedBy = "ataque") 
-  private List<Permite> permites;
-  
-  //donde tenga la lista hacemos esto:
-  public void setPermiteBidireccional(Permite perm) {
-      this.permites.add(perm);
-      perm.setAtaqueBidireccional(this); //asignamos el permite al ataque
-  }
-```
+    ```java
+    @OneToOne 
+    @JoinColumn(name="id_vulnerabilidad") //ponemos en name como se llame en la base de datos
+    // private int id_vulnerabilidad;
+    private Vulnerabilidad vulnerabilidad; //usamos la clase
+    private String descripcion;
 
-Entidad Permite:
+    //creamos un método para asignar una vulnerabilidad a una solución y viceversa
+    public void setVulnerabilidadBidireccional(Vulnerabilidad vulnera){
+        this.vulnerabilidad = vulnera;
+        vulnera.setSolucion(this); //asignamos la vulnerabilidad a la solución
+    }
+    ```
 
-```java
-//private int id_ataque;
-  @ManyToOne
-  @JoinColumn(name="id_ataque") 
-  private Ataque ataque;
-  private Byte impacto;
-  private LocalDate fecha_detectada;
-  
-  public void setAtaqueBidireccional(Ataque ataque) {
-      this.ataque = ataque;
-  }
-```
+2. **ONE TO MANY** y **MANY TO ONE**:
+
+    ```java
+    // Clase Padre
+    @OneToMany(mappedBy = "padre")
+    private List<Hijo> hijos;
+
+    // Clase Hijo
+    @ManyToOne
+    @JoinColumn(name = "padre_id")
+    private Padre padre;
+    ```
+
+    **Entidad Ataque**:
+
+    ```java
+    @OneToMany(mappedBy = "ataque") 
+    private List<Permite> permites;
+    
+    //donde tenga la lista hacemos esto:
+    public void setPermiteBidireccional(Permite perm) {
+        this.permites.add(perm);
+        perm.setAtaqueBidireccional(this); //asignamos el permite al ataque
+    }
+    ```
+
+    **Entidad Permite**:
+
+    ```java
+    //private int id_ataque;
+      @ManyToOne
+      @JoinColumn(name="id_ataque") 
+      private Ataque ataque;
+      private Byte impacto;
+      private LocalDate fecha_detectada;
+      
+      public void setAtaqueBidireccional(Ataque ataque) {
+          this.ataque = ataque;
+      }
+    ```
 
 ## HQL (Hibernate Query Language)
 
-### Devolver resultados:
-1. ``uniqueResult()``
+### Consultas frecuentes:
+1. **``uniqueResult()``**
   - Devuelve un **único resultado** (puede ser un objeto, un array, o una tupla dependiendo de la consulta).
   - Lanza excepción si hay más de un resultado.
   
-  ```java
-  String descripcion = session.createQuery(
-    "SELECT s.descripcion FROM Solucion s WHERE s.vulnerabilidad = :vulnera", String.class)
-    .setParameter("vulnera", vulneraConsulta)
-    .uniqueResult();
-  ```
+    ```java
+    String descripcion = session.createQuery(
+      "SELECT s.descripcion FROM Solucion s WHERE s.vulnerabilidad = :vulnera", String.class)
+      .setParameter("vulnera", vulneraConsulta)
+      .uniqueResult();
+    ```
 
-  ```java
-  session.createQuery("FROM Vulnerabilidad WHERE nombre = :nombre")
-       .setParameter("nombre", "Ransomware")
-       .uniqueResult();
-  ```
+    ```java
+    session.createQuery("FROM Vulnerabilidad WHERE nombre = :nombre")
+        .setParameter("nombre", "Ransomware")
+        .uniqueResult();
+    ```
 
-2. ``list()``
+2. **``list()``**
   - Devuelve una **lista completa** de resultados.
   - Se usa cuando pueden haber múltiples filas como resultado. 
   
-  ```java
-  List<String> descripciones = session.createQuery(
-    "SELECT s.descripcion FROM Solucion s WHERE s.vulnerabilidad = :vulnera", String.class)
-    .setParameter("vulnera", vulneraConsulta)
-    .list();
-  ```
+    ```java
+    List<String> descripciones = session.createQuery(
+      "SELECT s.descripcion FROM Solucion s WHERE s.vulnerabilidad = :vulnera", String.class)
+      .setParameter("vulnera", vulneraConsulta)
+      .list();
+    ```
 
-3. ``Object[] resultado = ...``
+3. **``Object[] resultado = ...``**
    - Cuando estás seleccionando **múltiples columnas** en la consulta.
    - Si solo seleccionas una columna, no necesitas un array.
 
-```java
-Object[] resultado = session.createQuery(
-    "SELECT v.nombre, v.descripcion FROM Vulnerabilidad v WHERE v.id = :id", Object[].class)
-    .setParameter("id", 1)
-    .uniqueResult();
-```
+    ```java
+    Object[] resultado = session.createQuery(
+        "SELECT v.nombre, v.descripcion FROM Vulnerabilidad v WHERE v.id = :id", Object[].class)
+        .setParameter("id", 1)
+        .uniqueResult();
+    ```
+
+## Lombok (para Hibernate)
+
+**Lombok** es una librería que evita escribir código repetitivo como getters, setters y constructores.
+
+**Anotaciones útiles**:
+
+- ``@Data`` → incluye getter, setter, toString(), equals(), etc.
+- ``@NoArgsConstructor``, ``@AllArgsConstructor``, ``@RequiredArgsConstructor``
+- ``@NonNull`` → marca campos obligatorios
+
+**Ejemplo**:
+
+    ```java
+    @Entity
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @RequiredArgsConstructor
+    public class Modulo {
+        @Id
+        @GeneratedValue
+        private int id;
+
+        @NonNull
+        private String nombre;
+    }
+    ```
