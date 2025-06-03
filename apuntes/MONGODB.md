@@ -1,7 +1,9 @@
 # MONGODB
-**MongoDB** (mongodb.com) es un sistema de base de datos documental (por lo que es NoSQL) y de código abierto.
+**MongoDB** (mongodb.com) es un sistema de base de datos NoSQL, orientada a documentos y de código abierto.
 
-Almacena los documentos en un tipo de formato JSON llamado **BSON** (Binary JSON).
+Almacena los documentos en un tipo de formato JSON llamado **BSON** (Binary JSON), lo que permite una estructura flexible y escalable.
+
+Es ideal para aplicaciones que requieren manejar grandes volúmenes de datos no estructurados o semi-estructurados.
 
 ## MongoDB Compass
 
@@ -44,11 +46,13 @@ Por hacer una **analogía** con las bases de datos relacionales:
 |   Unión de tablas	    |   Documentos embebidos                        |
 |   Clave primaria	    |   Clave primaria (_id como clave por defecto) | 
 
-## Operaciones en Java
+## Operaciones MongoDB en Java
 
 Para conectarse y trabajar con MongoDB desde Java se usa la **MongoDB Java Driver**.
 
 - **Conexión**:
+  
+    A continuación, se muestra cómo establecer una conexión:
 
     ```java
     mongoClient = new MongoClient(
@@ -57,6 +61,8 @@ Para conectarse y trabajar con MongoDB desde Java se usa la **MongoDB Java Drive
     database = mongoClient.getDatabase("biblioteca");
     collection = database.getCollection("autores");
     ```
+
+    **Nota**: Hay que asegurarse de tener el driver de MongoDB para Java en el proyecto. Si se utiliza Maven, se puede agregar la dependencia correspondiente en el archivo ``pom.xml``.
 
 - **Filtros y operadores comunes en MongoDB**:
     - ``$eq``:	Igual a	
@@ -85,8 +91,52 @@ Para conectarse y trabajar con MongoDB desde Java se usa la **MongoDB Java Drive
     ```
 
 - **Agregaciones en MongoDB**:
-    - Agrupar (``$group``)
-    - Filtrar (``$match``)
-    - Descomponer arrays (``$unwind``)
-    - Proyectar los campos a mostrar (``$project``)
-    - Ordenar (``$sort``)
+    - ``$group`` ->	Agrupa documentos según algún campo
+    - ``$match`` ->	Filtra documentos (como WHERE)
+    - ``$unwind`` -> Descompone arrays en documentos individuales
+    - ``$project`` -> Selecciona los campos que se mostrarán
+    - ``$sort`` -> Ordena documentos
+
+## Operaciones CRUD
+- **Crear** (Insertar documentos)
+    ```java
+    import com.mongodb.client.MongoCollection;
+    import org.bson.Document;
+
+    // Obtenemos la colección 'usuarios'
+    MongoCollection<Document> collection = database.getCollection("usuarios");
+
+    // Creamos un nuevo documento
+    Document doc = new Document("nombre", "Juan")
+                    .append("edad", 30);
+
+    // Insertamos el documento en la colección
+    collection.insertOne(doc);
+    ```
+
+- **Leer** (Consultar documentos)
+    ```java
+    import com.mongodb.client.FindIterable;
+
+    // Obtenemos todos los documentos de la colección
+    FindIterable<Document> documentos = collection.find();
+
+    for (Document document : documentos) {
+        System.out.println(document.toJson());
+    }
+    ```
+
+- **Actualizar documentos**
+    ```java
+    import com.mongodb.client.model.Filters;
+    import com.mongodb.client.model.Updates;
+
+    // Actualizamos el campo 'edad' del usuario con nombre 'Juan' a 31
+    collection.updateOne(Filters.eq("nombre", "Juan"), Updates.set("edad", 31));
+    ```
+
+- **Eliminar documentos**
+    ```java
+    // Eliminamos el documento donde el nombre sea 'Juan'
+    collection.deleteOne(Filters.eq("nombre", "Juan"));
+    ```
