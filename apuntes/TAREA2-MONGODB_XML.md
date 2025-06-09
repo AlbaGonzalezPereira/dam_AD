@@ -1,3 +1,7 @@
+# TAREA MONGODB Y XML
+
+## Principal.java
+```java
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
@@ -215,7 +219,7 @@ public class Principal {
      * id, titulo, precio, disponibilidad, edad_minima_recomendada y
      * plataforma).
      */
-    private static void listarVideojuegosPorEdad() {
+     private static void listarVideojuegosPorEdad() {
         System.out.println("Introduce la edad mínima recomendada:");
         int edadMinima = Integer.parseInt(sc.nextLine());
         String consulta = "for $v in " + bbdd + "//videojuego"
@@ -742,3 +746,28 @@ public class Principal {
     }
 
 }
+```
+
+## Consultas BaseX
+```xq
+(: título de los videojuegos :)
+for $v in doc("videojuegos")//videojuego
+return $v/titulo
+
+(: Modificar el valor de un elemento según un ID :)
+replace value of node doc("videojuegos")//videojuego[id='1']/precio with "69.99"
+
+(: Consulta 3: Mostrar el videojuego más barato para cada plataforma :)
+for $p in distinct-values(//videojuego/plataforma)
+let $min := min(doc("videojuegos")//videojuego[plataforma=$p]/precio)
+let $vj := doc("videojuegos")//videojuego[plataforma=$p and precio=$min][1]
+return <resultado>{
+    <plataforma>{$p}</plataforma>, 
+    return <videojuego>{$v/titulo, $v/precio}</videojuego>
+}</resultado>
+
+(: Consulta 4: Videojuegos cuya descripción incluya una subcadena (insensible a mayúsculas) :)
+for $v in //videojuego[contains(lower-case($v/descripcion), lower-case('subcadena'))]
+order by $v/genero
+return <videojuego>{$v/titulo, $v/genero}</videojuego>
+```
