@@ -11,6 +11,4 @@ public class Carrito {
     public Carrito() {
     }
   
-
-    
 }

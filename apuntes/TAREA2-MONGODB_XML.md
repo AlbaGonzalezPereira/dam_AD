@@ -748,6 +748,180 @@ public class Principal {
 }
 ```
 
+## db
+1. **``Carrito.java``**
+
+    ```java
+    package db;
+
+    /**
+     *
+     * @author alba_
+     */
+    public class Carrito {
+    private  String id;
+    private String usuarioId;
+
+        public Carrito() {
+        }
+    }
+    ```
+
+2. **``Compra.java``**
+
+    ```java
+    package db;
+
+    /**
+     *
+     * @author alba_
+     */
+    public class Compra {
+        
+    }
+    ```
+
+3. **``Usuario.java``**
+
+    ```java
+
+    package db;
+
+    /**
+     *
+     * @author alba_
+     */
+    public class Usuario {
+        private String id;
+        private String nombre;
+        private String email;
+        private int edad;
+        private String direccion;
+
+        public Usuario() {
+        }
+
+        public Usuario(String id, String nombre, int edad, String direccion ) {
+            this.id = id;
+            this.nombre = nombre;
+            this.email = id;
+            this.edad = edad;
+            this.direccion = direccion;
+        
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getNombre() {
+            return nombre;
+        }
+
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public int getEdad() {
+            return edad;
+        }
+
+        public void setEdad(int edad) {
+            this.edad = edad;
+        }
+
+        public String getDireccion() {
+            return direccion;
+        }
+
+        public void setDireccion(String direccion) {
+            this.direccion = direccion;
+        }
+
+        @Override
+        public String toString() {
+            return "Usuario: " + "id=" + id + ", nombre=" + nombre + ", email=" + email + ", edad=" + edad + ", direccion=" + direccion;
+        } 
+    }
+    ```
+
+4. **``Videojuego.java``**
+
+    ```java
+    package db;
+
+    /**
+     * Clase videojuegos
+     * @author alba_
+     */
+    public class Videojuego {
+        private int id;
+        private String nombre;
+        private int cantidad;
+        private double precio;
+        
+
+        public Videojuego() {
+        }
+
+        public Videojuego(int id, String nombre, int cantidad, double precio) {
+            this.id = id;
+            this.nombre = nombre;
+            this.cantidad = cantidad;
+            this.precio = precio;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getNombre() {
+            return nombre;
+        }
+
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
+
+        public int getCantidad() {
+            return cantidad;
+        }
+
+        public void setCantidad(int cantidad) {
+            this.cantidad = cantidad;
+        }
+
+        public double getPrecio() {
+            return precio;
+        }
+
+        public void setPrecio(double precio) {
+            this.precio = precio;
+        }
+
+        @Override
+        public String toString() {
+            return "Videojuego{" + "id=" + id + ", nombre=" + nombre + ", cantidad=" + cantidad + ", precio=" + precio + '}';
+        }
+    }
+    ```
+
 ## Consultas BaseX
 ```xq
 (: título de los videojuegos :)
