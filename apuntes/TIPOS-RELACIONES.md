@@ -2,6 +2,7 @@
 En JPA/Hibernate, las relaciones entre entidades se definen mediante anotaciones que indican la cardinalidad y la dirección de la asociación.
 
 1. **@OneToOne** (Uno a Uno)
+
 - **Unidireccional**: Una entidad tiene una referencia a otra, pero no viceversa.
 
 ```java
@@ -32,7 +33,7 @@ public class HistorialMedico {
 En este caso, HistorialMedico es el lado propietario de la relación.
 
 
-2. **@OneToMany / @ManyToOne** (Uno a Muchos / Muchos a Uno)
+1. **@OneToMany / @ManyToOne** (Uno a Muchos / Muchos a Uno)
 - **Unidireccional**: Solo una entidad conoce la relación.
 
 ```java
@@ -70,19 +71,19 @@ public class Empleado {
 ```java
 @Entity
 public class Estudiante {
-    @ManyToMany
-    @JoinTable(
-        name = "estudiante_curso",
-        joinColumns = @JoinColumn(name = "estudiante_id"),
-        inverseJoinColumns = @JoinColumn(name = "curso_id")
-    )
-    private Set<Curso> cursos;
+@ManyToMany
+@JoinTable(
+    name = "estudiante_curso",
+    joinColumns = @JoinColumn(name = "estudiante_id"),
+    inverseJoinColumns = @JoinColumn(name = "curso_id")
+)
+private Set<Curso> cursos;
 }
 
 @Entity
 public class Curso {
-    @ManyToMany(mappedBy = "cursos")
-    private Set<Estudiante> estudiantes;
+@ManyToMany(mappedBy = "cursos")
+private Set<Estudiante> estudiantes;
 }
 ```
 

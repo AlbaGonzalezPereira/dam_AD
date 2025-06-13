@@ -667,7 +667,7 @@ public interface Repositorio<T> {
 }
 ```
 
-2. **``RepositorioCita.java``**ç
+2. **``RepositorioCita.java``**
 
 ```java
 
